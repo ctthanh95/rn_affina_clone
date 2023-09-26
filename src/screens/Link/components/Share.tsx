@@ -97,7 +97,7 @@ const Share = ({code, link}: TShare) => {
           </AppText>
         </TouchableOpacity>
       </AppView>
-      <AppView row marginBottom={ms(20)}>
+      <AppView row marginBottom={ms(20)} marginTop={ms(12)}>
         <ButtonSocial
           title="facebook"
           icon={<Facebook />}

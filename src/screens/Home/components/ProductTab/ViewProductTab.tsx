@@ -31,7 +31,7 @@ const ViewProductTab = ({data, date, setDate, productReportData}: Props) => {
             />
           )}
           estimatedItemSize={200}
-          keyExtractor={(item: any) => item.id}
+          keyExtractor={(item: any, index: number) => `${item.id}${index}`}
           showsVerticalScrollIndicator={false}
         />
       </AppView>

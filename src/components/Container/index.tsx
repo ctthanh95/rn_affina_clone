@@ -71,7 +71,7 @@ export default Container;
 
 const BackButton = ({onPress}: any) => (
   <TouchableOpacity activeOpacity={0.9} onPress={onPress}>
-    <Left width={ms(24)} height={ms(24)} />
+    <Left width={ms(24)} height={ms(24)} fill={PRIMARY} />
   </TouchableOpacity>
 );
 

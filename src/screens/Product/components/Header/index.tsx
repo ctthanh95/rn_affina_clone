@@ -3,7 +3,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {ImageBackground, StyleSheet, TouchableOpacity} from 'react-native';
 import {AppView, AppText, AppImage} from '@components';
 import {goBack} from '@navigation/RootNavigation';
-import {WHITE} from '@utils/colors';
+import {PRIMARY, WHITE} from '@utils/colors';
 import {CONTENT} from '@utils/fontStyle';
 import {ms, s} from '@utils/responsive';
 import {Down, Left} from '@utils/svg';
@@ -55,7 +55,7 @@ const Header = ({programSelected, onModalProgram}: Props) => {
       alignCenter
       justifySpaceBetween>
       <TouchableOpacity activeOpacity={0.9} onPress={goBack}>
-        <Left width={ms(24)} height={ms(24)} />
+        <Left width={ms(24)} height={ms(24)} fill={PRIMARY} />
       </TouchableOpacity>
       <ImageBackground
         style={styles.container}

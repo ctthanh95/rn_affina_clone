@@ -44,7 +44,6 @@ const SectionListProduct = ({title, type, data}: Props) => {
       });
     }
   };
-
   return (
     <AppView>
       <AppView row alignCenter justifySpaceBetween marginBottom={ms(12)}>
@@ -60,7 +59,7 @@ const SectionListProduct = ({title, type, data}: Props) => {
           <FlashList
             data={data}
             estimatedItemSize={200}
-            keyExtractor={(item: any) => item.id}
+            keyExtractor={(item: any, index: number) => `${item.id}${index}`}
             renderItem={({item}: any) => (
               <ItemProduct item={item} onSelectItem={handleSelectItem} />
             )}

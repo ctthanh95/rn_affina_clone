@@ -2,12 +2,6 @@ module.exports = {
   presets: ['module:metro-react-native-babel-preset'],
   plugins: [
     [
-      'react-native-reanimated/plugin',
-      {
-        globals: ['__scanCodes'],
-      },
-    ],
-    [
       'module-resolver',
       {
         extensions: [
@@ -37,6 +31,12 @@ module.exports = {
           '@sagas': './src/redux/sagas',
           '@api': './src/api',
         },
+      },
+    ],
+    [
+      'react-native-reanimated/plugin',
+      {
+        globals: ['__scanCodes'],
       },
     ],
   ],
