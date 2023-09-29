@@ -6,7 +6,7 @@ import {HOME_TAB_TYPE} from '@utils/constants';
 import {CONTENT} from '@utils/fontStyle';
 import {ms, vs} from '@utils/responsive';
 
-const ItemMenu = ({item, onPress, isSelected}: TTabItem) => (
+const Item = ({item, onPress, isSelected}: TTabItem) => (
   <TouchableOpacity
     activeOpacity={0.9}
     style={styles.container}
@@ -26,14 +26,14 @@ const ItemMenu = ({item, onPress, isSelected}: TTabItem) => (
   </TouchableOpacity>
 );
 
-const Menu = ({menuSelected, onMenuSelected}: TMenu) => {
+const Tabs = ({tabSelected, onTabSelected}: TTabs) => {
   return (
     <AppView row>
       {HOME_TAB_TYPE.map(item => (
-        <ItemMenu
+        <Item
           item={item}
-          onPress={onMenuSelected}
-          isSelected={menuSelected === item.code}
+          onPress={onTabSelected}
+          isSelected={tabSelected === item.code}
           key={item.code}
         />
       ))}
@@ -41,7 +41,7 @@ const Menu = ({menuSelected, onMenuSelected}: TMenu) => {
   );
 };
 
-export default Menu;
+export default Tabs;
 
 const styles = StyleSheet.create({
   container: {
@@ -50,9 +50,9 @@ const styles = StyleSheet.create({
   },
 });
 
-type TMenu = {
-  menuSelected: string;
-  onMenuSelected: (menu: string) => void;
+type TTabs = {
+  tabSelected: string;
+  onTabSelected: (menu: string) => void;
 };
 
 type TTabItem = {

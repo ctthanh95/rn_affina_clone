@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {StyleSheet, TouchableOpacity, TextInput} from 'react-native';
 import {debounce} from 'lodash';
 import {BLACK, PRIMARY} from '@utils/colors';
@@ -10,7 +10,7 @@ import {CONTENT} from '@utils/fontStyle';
 type Props = {
   isDisabled?: boolean;
   onPress?: () => void;
-  onSearch?: (text: string) => void;
+  onSearch?: (search: string) => void;
   onDelete?: () => void;
 };
 
@@ -31,7 +31,7 @@ const SearchInput = ({
     if (onSearch) onSearch(text);
   };
 
-  const debouncedSearch = debounce(handleSearch, 300);
+  const debouncedSearch = useCallback(debounce(handleSearch, 1000), []);
 
   const onChangeText = (text: string) => {
     setValue(text);
@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     borderRadius: ms(20),
     borderWidth: 1,
     borderColor: BLACK[3],
+    marginBottom: ms(20),
   },
   input: {
     marginHorizontal: ms(8),

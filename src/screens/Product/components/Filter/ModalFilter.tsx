@@ -132,17 +132,18 @@ const ModalFilter = ({
         backgroundColor={WHITE}
         paddingTop={insets.top}
         paddingHorizontal={ms(23)}>
+        <AppView row alignCenter>
+          <TouchableOpacity activeOpacity={0.9} onPress={hanleCloseFilter}>
+            <Close />
+          </TouchableOpacity>
+          <AppText flexGrow style={CONTENT.bold_16} color={PRIMARY} center>
+            Bộ lọc
+          </AppText>
+        </AppView>
         <ScrollView
           showsVerticalScrollIndicator={false}
           scrollEnabled={scrollEnabled}>
-          <AppView row alignCenter marginBottom={ms(32)}>
-            <TouchableOpacity activeOpacity={0.9} onPress={hanleCloseFilter}>
-              <Close />
-            </TouchableOpacity>
-            <AppText flexGrow style={CONTENT.bold_16} color={PRIMARY} center>
-              Bộ lọc
-            </AppText>
-          </AppView>
+          <AppView marginTop={ms(32)} />
           <Title title="SẮP XẾP THEO MỨC HOA HỒNG" />
           <Controller
             control={control}

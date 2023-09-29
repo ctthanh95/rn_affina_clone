@@ -3,11 +3,10 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 import {AppImage, AppView, AppText} from '@components';
 import {BLACK, WHITE} from '@utils/colors';
 import {CONTENT} from '@utils/fontStyle';
-import {vs, ms, width} from '@utils/responsive';
+import {vs, ms, WIDTH} from '@utils/responsive';
 import moment from 'moment';
 import {navigate} from '@navigation/RootNavigation';
 import {DETAIL_NEWS} from '@navigation/screens';
-const WIDTH = width - 2 * ms(23);
 
 type Props = {
   item: any;

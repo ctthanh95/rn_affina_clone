@@ -6,7 +6,7 @@ import {ms} from '@utils/responsive';
 
 const Empty = () => {
   return (
-    <AppView center marginVertical={ms(12)}>
+    <AppView center marginBottom={ms(20)}>
       <AppText color={BLACK[30]}>Không tìm thấy kết quả phù hợp!</AppText>
     </AppView>
   );

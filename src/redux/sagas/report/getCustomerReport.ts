@@ -15,7 +15,6 @@ export function* getCustomerReportSaga(options: any) {
   try {
     function* execution() {
       const {code, message, data} = yield call(getCustomerReportApi, dataPost);
-
       switch (code) {
         case '200':
           // let temp = {

@@ -8,7 +8,7 @@ import {
 } from '@slices/configSlice';
 import {WHITE} from '@utils/colors';
 import {CONTENT} from '@utils/fontStyle';
-import {s, ms, vs, width} from '@utils/responsive';
+import {s, ms, vs, WIDTH} from '@utils/responsive';
 import {getLink, removeTagHtml} from '@utils/global';
 
 type Props = {
@@ -87,10 +87,9 @@ const ItemProduct = ({item, onSelectItem}: Props) => {
 
 export default ItemProduct;
 
-// 2 * 23 : paddingHorizontal
 // 2 * 12 : padding between items
 // /3 : 3 items
-const widthItem = (width - 2 * 23 - 2 * 12) / 3;
+const widthItem = (WIDTH - 2 * ms(12)) / 3;
 
 const styles = StyleSheet.create({
   item: {

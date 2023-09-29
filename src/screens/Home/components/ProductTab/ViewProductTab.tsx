@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 import {AppView} from '@components';
 import {FlashList} from '@shopify/flash-list';
 import SectionListProduct from './SectionListProduct';
-import ProductChart from '../Chart/ProductChart';
+import ProductChart from './ProductChart';
 
 type Props = {
   data: any;

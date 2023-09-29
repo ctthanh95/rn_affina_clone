@@ -15,7 +15,6 @@ export function* getCustomerListSaga(options: any) {
   try {
     function* execution() {
       const {code, message, data} = yield call(getCustomerListApi, dataGet);
-
       switch (code) {
         case '200':
           callbackSuccess(data);

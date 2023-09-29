@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react';
 import {TouchableOpacity, StyleSheet} from 'react-native';
 import {AppText, AppView, SearchInput} from '@components';
-import CustomerChart from '../Chart/CustomerChart';
+import CustomerChart from './CustomerChart';
 import ListCustomer from './ListCustomer';
 import TypeCustomer from './TypeCustomer';
 import {CONTENT} from '@utils/fontStyle';
@@ -89,6 +89,5 @@ const styles = StyleSheet.create({
   },
   list: {
     minHeight: 50,
-    marginTop: ms(12),
   },
 });

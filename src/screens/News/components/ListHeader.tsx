@@ -10,7 +10,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import {AppView} from '@components';
 import ItemHot from './ItemHot';
-import {ms, width} from '@utils/responsive';
+import {WIDTH, ms, width} from '@utils/responsive';
 import {BLACK, SELECT_BUTTON} from '@utils/colors';
 
 type TListHeader = {
@@ -20,8 +20,6 @@ type TPaginationDot = {
   data: any;
   scrollX: any;
 };
-
-const WIDTH = width - 2 * ms(23);
 
 const PaginationDot = ({data, scrollX}: TPaginationDot) => {
   return (

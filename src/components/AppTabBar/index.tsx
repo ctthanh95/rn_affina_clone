@@ -3,9 +3,7 @@ import {StyleSheet} from 'react-native';
 import {TabBar, TabView} from 'react-native-tab-view';
 import {BACKGROUND, BLACK, SELECT_BUTTON} from '@utils/colors';
 import {CONTENT} from '@utils/fontStyle';
-import {ms, vs, width} from '@utils/responsive';
-
-const WIDTH = width - 2 * ms(23);
+import {WIDTH, ms, vs, width} from '@utils/responsive';
 
 type Props = {
   routes: {key: string; title: string}[];
@@ -14,7 +12,12 @@ type Props = {
   onSelected?: (index: number) => void;
 };
 
-const Tab = ({routes, renderScene, width = 'auto', onSelected}: Props) => {
+const AppTabBar = ({
+  routes,
+  renderScene,
+  width = 'auto',
+  onSelected,
+}: Props) => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -52,7 +55,7 @@ const Tab = ({routes, renderScene, width = 'auto', onSelected}: Props) => {
   );
 };
 
-export default memo(Tab);
+export default memo(AppTabBar);
 
 const styles = StyleSheet.create({
   background: {

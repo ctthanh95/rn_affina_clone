@@ -1,5 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {AppView, AuthInfomation, Container, Empty, Tab} from '@components';
+import {
+  AppView,
+  AuthInfomation,
+  Container,
+  Empty,
+  AppTabBar,
+} from '@components';
 import ListNews from './components/ListNews';
 import {ms} from '@utils/responsive';
 
@@ -36,7 +42,7 @@ const View = ({dataTopic, dataNews, onSelectedTopic}: Props) => {
       <AuthInfomation />
       <AppView flex paddingLeft={ms(23)}>
         {lengthRoutes ? (
-          <Tab
+          <AppTabBar
             renderScene={renderScene}
             routes={routes}
             onSelected={handleSelected}

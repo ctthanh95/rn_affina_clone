@@ -7,7 +7,7 @@ import {ms, vs} from '@utils/responsive';
 import {BLACK, WHITE} from '@utils/colors';
 import {CONTENT, TITLE} from '@utils/fontStyle';
 import {getTime, numberWithCommas} from '@utils/global';
-import Circle, {CircleEmpty, LabelCustomer} from './Custom';
+import Circle, {CircleEmpty, LabelCustomer} from 'src/components/Circle';
 
 type Props = {
   customerReportData: any;
@@ -97,7 +97,7 @@ const CustomerChart = ({customerReportData}: Props) => {
             </AppView>
             <AppView flex>
               {data.map(item => (
-                <LabelCustomer key={item.id} item={item} total={total} />
+                <LabelCustomer key={item.id} item={item} />
               ))}
             </AppView>
           </AppView>

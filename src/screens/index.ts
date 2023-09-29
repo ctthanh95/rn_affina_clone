@@ -27,6 +27,8 @@ import SecuritySetting from './SecuritySetting';
 import Dashboard from './Dashboard';
 import Link from './Link';
 import Scan from './Scan';
+import Contract from './Contract';
+import DetailContract from './DetailContract';
 
 export {
   Home,
@@ -58,4 +60,6 @@ export {
   Dashboard,
   Link,
   Scan,
+  Contract,
+  DetailContract,
 };

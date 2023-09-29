@@ -36,7 +36,7 @@ const ListHomeInsurance = ({data, onSelectProvider}: TList) => {
         <AppView
           paddingTop={ms(12)}
           paddingLeft={ms(12)}
-          marginVertical={ms(20)}
+          marginBottom={ms(20)}
           radius={ms(12)}
           borderWidth={1}
           borderColor={BLACK[10]}>

@@ -3,15 +3,13 @@ import {Platform, TouchableOpacity} from 'react-native';
 import RenderHtml from 'react-native-render-html';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {AppImage, AppText, AppTextInput, AppView, Container} from '@components';
-import {ms, width} from '@utils/responsive';
+import {WIDTH, ms, width} from '@utils/responsive';
 import {CONTENT} from '@utils/fontStyle';
 import {BLACK, WHITE} from '@utils/colors';
 import {formatTime} from '@utils/global';
 import Comment from './components/Comment';
 import {Send} from '@utils/svg';
 import styles from './styles';
-
-const WIDTH = width - 2 * ms(23);
 
 const tagsStyles = {
   p: {

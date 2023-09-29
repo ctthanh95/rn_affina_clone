@@ -1,15 +1,9 @@
 import React from 'react';
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import {AppText, AppView} from '@components';
-import {ms, width} from '@utils/responsive';
+import {WIDTH, ms} from '@utils/responsive';
 import {CONTENT} from '@utils/fontStyle';
-import {BACKGROUND, BLACK, PRIMARY, WHITE} from '@utils/colors';
+import {BACKGROUND, PRIMARY, WHITE} from '@utils/colors';
 import {navigate} from '@navigation/RootNavigation';
 import {SYSTEM_INFOMATION} from '@navigation/screens';
 
@@ -62,11 +56,10 @@ const MenuSetting = ({title, data, isPrimaryTitle = false}: TMenuSetting) => {
 
 export default MenuSetting;
 
-// 2 * 23 : paddingHorizontal
 // 2 * 12 : padding between items
 // /3 : 3 items
 
-const widthItem = (width - 2 * 23 - 2 * 12) / 3;
+const widthItem = (WIDTH - 2 * ms(12)) / 3;
 
 const styles = StyleSheet.create({
   description: {

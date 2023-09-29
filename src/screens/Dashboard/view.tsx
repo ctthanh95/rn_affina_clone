@@ -1,18 +1,17 @@
 import React from 'react';
-import {ScrollView, Text} from 'react-native';
-import {
-  Container,
-  AuthInfomation,
-  AppView,
-  AppText,
-  AppBottomSheet,
-} from '@components';
+import {ScrollView} from 'react-native';
+import {Container, AuthInfomation, AppView, AppBottomSheet} from '@components';
 import {ms} from '@utils/responsive';
-import styles from './styles';
-import Contract from './components/Contract';
+import Group from './components/Group';
 import IntroduceCode from './components/IntroduceCode';
+import ContractChart from './components/ContractChart';
+import IncomeChart from './components/IncomeChart';
+import styles from './styles';
 
 type Props = {
+  dataIncome: any;
+  totalBonus: number;
+  dataContract: any;
   bottomSheetRef: any;
   introduceCode: string;
   setIntroduceCode: (text: string) => void;
@@ -20,6 +19,9 @@ type Props = {
 };
 
 const View = ({
+  dataIncome,
+  totalBonus,
+  dataContract,
   bottomSheetRef,
   introduceCode,
   setIntroduceCode,
@@ -36,7 +38,11 @@ const View = ({
           overScrollMode="never"
           bounces={false}>
           <AppView paddingHorizontal={ms(23)}>
-            <Contract onBottomSheet={onBottomSheet} />
+            <Group onBottomSheet={onBottomSheet} />
+            {dataIncome ? (
+              <IncomeChart data={dataIncome} total={totalBonus} />
+            ) : null}
+            <ContractChart dataContract={dataContract} />
           </AppView>
         </ScrollView>
       </Container>

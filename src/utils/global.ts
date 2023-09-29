@@ -146,3 +146,14 @@ export const getTimeFromNow = (time: number) => {
 
   return formatTime(time);
 };
+
+export const keyExtractor = (item: any, index: number) => `${item?.id}${index}`;
+
+export const getMonth = (date: Date): string => {
+  const month = getTime(date, 'month').toString().padStart(2, '0');
+  const year = getTime(date, 'year');
+  if (year !== getTime(moment(), 'year')) {
+    return `${month}/${year}`;
+  }
+  return month;
+};

@@ -9,7 +9,7 @@ import {selectHostStaticResource} from '@slices/configSlice';
 import {getLink} from '@utils/global';
 
 type Props = {
-  uri?: string;
+  uri?: any;
   resizeMode?: 'contain' | 'cover' | 'stretch' | 'center';
   style?: object;
 };

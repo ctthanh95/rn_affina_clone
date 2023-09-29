@@ -6,7 +6,7 @@ import RootStack from './RootStack';
 import {Loading, Internet, Error} from '@components';
 import {useAppDispatch, useAppSelector} from '@hooks/redux';
 import {changeConnectSlice, selectIsConnected} from '@slices/connectSlice';
-import {selectIsLoading} from '@slices/loadingSlice';
+import {selectCount, selectIsLoading} from '@slices/loadingSlice';
 import {selectIsError} from '@slices/errorSlice';
 import {selectHostStaticResource, selectListCity} from '@slices/configSlice';
 import {getConfig} from '@sagas/config/getConfig';
@@ -20,6 +20,9 @@ const RootApp = () => {
   const isError = useAppSelector(selectIsError);
   const hostStaticResource = useAppSelector(selectHostStaticResource);
   const listCity = useAppSelector(selectListCity);
+  // const count = useAppSelector(selectCount);
+  // console.log(count);
+
   const lengthListCity = listCity.length;
 
   useEffect(() => {

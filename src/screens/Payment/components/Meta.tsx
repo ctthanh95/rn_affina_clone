@@ -35,9 +35,18 @@ const Item = ({item, index}: any) => {
 const Meta = ({data, amountPay, periodLable}: TMeta) => {
   const formatData = useMemo(() => {
     const result = data.map((item: any) => {
+      const listMaximumAmountMainBenefit = item?.listMaximumAmountMainBenefit
+        ? item?.listMaximumAmountMainBenefit[0]
+        : {};
+      const listFeeAndMaximumAmountSideBenefit =
+        item?.listFeeAndMaximumAmountSideBenefit
+          ? item?.listFeeAndMaximumAmountSideBenefit[0]
+          : {};
       const value =
-        item?.listMaximumAmountMainBenefit[0]?.maximumAmount ||
-        item?.listFeeAndMaximumAmountSideBenefit[0]?.maximumAmount;
+        listMaximumAmountMainBenefit?.maximumAmount ||
+        listFeeAndMaximumAmountSideBenefit?.maximumAmount ||
+        '';
+
       return {
         id: item.id,
         name: item.name,

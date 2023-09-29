@@ -27,3 +27,5 @@ export const s = scale;
 export const vs = verticalScale;
 export const ms = moderateScale;
 export const mvs = moderateVerticalScale;
+
+export const WIDTH = width - 2 * ms(23);

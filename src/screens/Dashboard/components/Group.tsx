@@ -56,7 +56,7 @@ const Item = ({icon, title, desciption, onPress}: TItem) => {
   );
 };
 
-const Contract = ({onBottomSheet}: Props) => {
+const Group = ({onBottomSheet}: Props) => {
   const handleStructure = () => {
     navigate(LINKSCREEN);
   };
@@ -65,7 +65,7 @@ const Contract = ({onBottomSheet}: Props) => {
       backgroundColor={WHITE}
       radius={ms(32)}
       padding={ms(20)}
-      marginVertical={ms(16)}>
+      marginVertical={ms(20)}>
       <AppText color={PRIMARY} style={CONTENT.bold_20}>
         Nhóm của tôi
       </AppText>
@@ -85,6 +85,6 @@ const Contract = ({onBottomSheet}: Props) => {
   );
 };
 
-export default Contract;
+export default Group;
 
 const styles = StyleSheet.create({});

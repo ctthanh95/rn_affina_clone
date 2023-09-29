@@ -3,6 +3,7 @@ import {TouchableOpacity} from 'react-native';
 import {AppView, SearchInput} from '@components';
 import {ms} from '@utils/responsive';
 import {Filter} from '@utils/svg';
+import {PRIMARY} from '@utils/colors';
 
 type Props = {
   onModal: () => void;
@@ -18,7 +19,7 @@ const FilterData = ({onModal, onSearch, onResetData}: Props) => {
           <SearchInput onSearch={onSearch} onDelete={onResetData} />
         </AppView>
         <TouchableOpacity activeOpacity={0.9} onPress={onModal}>
-          <Filter />
+          <Filter fill={PRIMARY} />
         </TouchableOpacity>
       </AppView>
     </AppView>

@@ -8,8 +8,10 @@ import {navigationRef} from './RootNavigation';
 import {
   Buyer,
   Chat,
+  Contract,
   CreateAccount,
   Dashboard,
+  DetailContract,
   DetailCustomer,
   DetailNews,
   DetailProduct,
@@ -40,8 +42,10 @@ import {
   BOTTOM_TAB,
   BUYER,
   CHAT,
+  CONTRACT,
   CREATE_ACCOUNT,
   DASHBOARD,
+  DETAIL_CONTRACT,
   DETAIL_CUSTOMER,
   DETAIL_NEWS,
   DETAIL_PRODUCT,
@@ -85,7 +89,7 @@ import {useAppSelector} from '@hooks/redux';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const screenOptions = {
+const screenOptions: any = {
   headerShown: false,
   animation: 'none',
 };
@@ -96,7 +100,7 @@ function BottomTab() {
     <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarIcon: ({focused}) => {
-          let Icon;
+          let Icon: any;
           switch (route.name) {
             case HOME:
               Icon = HomeSvg;
@@ -210,6 +214,8 @@ const AuthStack = () => (
     <Stack.Screen name={SECURITY_SETTING} component={SecuritySetting} />
     <Stack.Screen name={LINK} component={Link} />
     <Stack.Screen name={SCAN} component={Scan} />
+    <Stack.Screen name={CONTRACT} component={Contract} />
+    <Stack.Screen name={DETAIL_CONTRACT} component={DetailContract} />
   </Stack.Navigator>
 );
 

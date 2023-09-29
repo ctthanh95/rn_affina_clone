@@ -3,7 +3,6 @@ import {createAction} from '@reduxjs/toolkit';
 import handleSaga from '../handleSaga';
 import {updateErrorSlice} from '@slices/errorSlice';
 import {getProductReportApi} from '@api/report';
-import {finishCallApiSlice} from '@slices/loadingSlice';
 
 export const getProductReport = createAction('GET_PRODUCT_REPORT');
 

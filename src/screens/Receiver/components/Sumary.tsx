@@ -1,23 +1,43 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 import {AppView, AppText} from '@components';
-import {PRIMARY, WHITE, BLACK} from '@utils/colors';
+import {PRIMARY, WHITE, BLACK, LIGHT_BACKGROUND} from '@utils/colors';
 import {GENDER_TYPE} from '@utils/constants';
 import {TITLE, CONTENT} from '@utils/fontStyle';
 import {formatTime} from '@utils/global';
 import {ms} from '@utils/responsive';
 import {Edit} from '@utils/svg';
-import Item from './Item';
 
-type Props = {
-  title: string;
-  data: any;
-  onPress: () => void;
-};
+const Item = ({title, content, isWhite = true}: TItem) => (
+  <AppView
+    row
+    paddingHorizontal={ms(12)}
+    paddingVertical={ms(16)}
+    backgroundColor={isWhite ? WHITE : LIGHT_BACKGROUND}>
+    <AppView width={'30%'}>
+      <AppText style={CONTENT.semibold_16} color={BLACK[50]}>
+        {title}
+      </AppText>
+    </AppView>
+    <AppView width={'70%'}>
+      <AppText style={CONTENT.semibold_16} color={BLACK[100]}>
+        {content}
+      </AppText>
+    </AppView>
+  </AppView>
+);
 
-const Sumary = ({title, data, onPress}: Props) => {
-  const {name, gender, licenseTypeName, license, dob, phone, email, address} =
-    data;
+const Sumary = ({title, data = {}, onPress}: TSumary) => {
+  const {
+    name = '',
+    gender,
+    licenseTypeName,
+    license,
+    dob,
+    phone,
+    email,
+    address,
+  } = data;
   return (
     <>
       <AppView row alignCenter justifySpaceBetween>
@@ -54,4 +74,14 @@ const Sumary = ({title, data, onPress}: Props) => {
 
 export default Sumary;
 
-const styles = StyleSheet.create({});
+type TSumary = {
+  title: string;
+  data: any;
+  onPress: () => void;
+};
+
+type TItem = {
+  title: string;
+  content: string;
+  isWhite?: boolean;
+};

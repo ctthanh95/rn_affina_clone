@@ -3,19 +3,19 @@ import {ScrollView} from 'react-native';
 import {Container, AppView, Gradient, AuthInfomation} from '@components';
 import ProductTab from './components/ProductTab';
 import CustomerTab from './components/CustomerTab';
-import Menu from './components/Menu';
+import Tabs from './components/Tabs';
 import {ms} from '@utils/responsive';
 import styles from './styles';
 
-const renderMenu = new Map([
+const renderTabs = new Map([
   ['product', <ProductTab />],
   ['customer', <CustomerTab />],
 ]);
 
 const View = () => {
-  const [menuSelected, setMenuSelected] = useState('product');
+  const [tabSelected, setTabSelected] = useState('product');
   const handleMenuSelected = (name: string) => {
-    setMenuSelected(name);
+    setTabSelected(name);
   };
 
   return (
@@ -29,11 +29,8 @@ const View = () => {
         bounces={false}>
         <Gradient />
         <AppView paddingHorizontal={ms(23)}>
-          <Menu
-            menuSelected={menuSelected}
-            onMenuSelected={handleMenuSelected}
-          />
-          {renderMenu.get(menuSelected)}
+          <Tabs tabSelected={tabSelected} onTabSelected={handleMenuSelected} />
+          {renderTabs.get(tabSelected)}
         </AppView>
       </ScrollView>
     </Container>

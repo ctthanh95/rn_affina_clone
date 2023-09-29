@@ -3,28 +3,18 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 import MonthPicker from 'react-native-month-year-picker';
 import Svg, {G} from 'react-native-svg';
 import {Portal} from '@gorhom/portal';
-import moment from 'moment';
-import {AppView, AppText} from '@components';
+import {AppView, AppText, Circle} from '@components';
 import {ms, s, vs} from '@utils/responsive';
 import {BLACK, WHITE} from '@utils/colors';
 import {Calender} from '@utils/svg';
 import {CONTENT, TITLE} from '@utils/fontStyle';
-import {getTime, numberWithCommas} from '@utils/global';
-import Circle, {CircleEmpty, LabelProduct} from './Custom';
+import {getMonth, numberWithCommas} from '@utils/global';
+import {CircleEmpty, LabelProduct} from 'src/components/Circle';
 
 type Props = {
   date: Date;
   setDate: (date: Date) => void;
   productReportData: any;
-};
-
-const getMonth = (date: Date): string => {
-  const month = getTime(date, 'month').toString().padStart(2, '0');
-  const year = getTime(date, 'year');
-  if (year !== getTime(moment(), 'year')) {
-    return `${month}/${year}`;
-  }
-  return month;
 };
 
 const getAngle = (value: number, total: number): number =>

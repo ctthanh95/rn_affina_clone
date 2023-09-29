@@ -10,6 +10,10 @@ const RADIUS = s(65);
 
 const CIRCLE_CIRUMFERENCE = 2 * Math.PI * RADIUS;
 
+type TLabel = {
+  item: any;
+};
+
 type Props = {
   item: any;
   total: number;
@@ -18,6 +22,24 @@ type Props = {
 const floorNumber = (value: number) => {
   if (value) return Math.floor(value);
   return 0;
+};
+
+export const LabelContract = ({item}: TLabel) => {
+  return (
+    <AppView row marginBottom={ms(8)} alignCenter>
+      <AppView
+        circle={s(12)}
+        backgroundColor={item.color}
+        marginRight={ms(4)}
+      />
+      <AppText style={CONTENT.semibold_10} color={BLACK[100]}>
+        {item.title}{' '}
+        <AppText style={CONTENT.bold_12}>
+          {item.value ? numberWithCommas(item.value) : '0'} hđ
+        </AppText>
+      </AppText>
+    </AppView>
+  );
 };
 
 export const LabelProduct = ({item, total}: Props) => {
@@ -36,7 +58,7 @@ export const LabelProduct = ({item, total}: Props) => {
   );
 };
 
-export const LabelCustomer = ({item}: Props) => {
+export const LabelCustomer = ({item}: TLabel) => {
   return (
     <AppView row marginBottom={ms(8)} alignCenter>
       <AppView
@@ -53,6 +75,17 @@ export const LabelCustomer = ({item}: Props) => {
     </AppView>
   );
 };
+
+export const CircleEmpty = () => (
+  <CircleSvg
+    cx="50%"
+    cy="50%"
+    r={RADIUS}
+    stroke="#F1F6F9"
+    fill="transparent"
+    strokeWidth={s(16)}
+  />
+);
 
 const Circle = ({item, total}: Props) => {
   const percent = floorNumber((item.value / total) * 100);
@@ -80,16 +113,5 @@ const Circle = ({item, total}: Props) => {
     </>
   );
 };
-
-export const CircleEmpty = () => (
-  <CircleSvg
-    cx="50%"
-    cy="50%"
-    r={RADIUS}
-    stroke="#F1F6F9"
-    fill="transparent"
-    strokeWidth={s(16)}
-  />
-);
 
 export default Circle;

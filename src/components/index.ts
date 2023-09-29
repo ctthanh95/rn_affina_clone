@@ -16,9 +16,9 @@ import AppModal from './AppModal';
 import AuthInfomation from './AuthInfomation';
 import SearchInput from './SearchInput';
 import Gradient from './Gradient';
-import Chart from './Chart';
+import Circle from './Circle';
 import BottomSheetProvince from './BottomSheetProvince';
-import Tab from './Tab';
+import AppTabBar from './AppTabBar';
 import Error from './Error';
 import Internet from './Internet';
 import AppBottomSheet from './AppBottomSheet';
@@ -30,6 +30,7 @@ import Blur from './Blur';
 import Select from './Select';
 import AppSwitch from './AppSwitch';
 import Popup from './Popup';
+import AppTabs from './AppTabs';
 
 export {
   AppText,
@@ -50,9 +51,9 @@ export {
   AuthInfomation,
   SearchInput,
   Gradient,
-  Chart,
+  Circle,
   BottomSheetProvince,
-  Tab,
+  AppTabBar,
   Error,
   Internet,
   AppBottomSheet,
@@ -64,4 +65,5 @@ export {
   Select,
   AppSwitch,
   Popup,
+  AppTabs,
 };
