@@ -6,6 +6,7 @@ const CITY = '/other/public/city';
 const DISTRICT = '/other/public/district';
 const WARD = '/other/public/ward';
 const UPLOAD = '/other/public/upload';
+const COMPANY_PROVIDER = '/user/public/company/provider';
 
 export const getConfigApi = () => {
   return axiosGet(CONFIG);
@@ -29,4 +30,8 @@ export const getWardApi = (data: any) => {
 
 export const uploadImageApi = (data: any) => {
   return axiosFormData(UPLOAD, data);
+};
+
+export const getCompanyProviderApi = (data: any) => {
+  return axiosPot(COMPANY_PROVIDER, data);
 };

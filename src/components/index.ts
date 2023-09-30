@@ -31,6 +31,8 @@ import Select from './Select';
 import AppSwitch from './AppSwitch';
 import Popup from './Popup';
 import AppTabs from './AppTabs';
+import Filter from './Filter';
+import KeyboardSpacer from './KeyboardSpacer';
 
 export {
   AppText,
@@ -66,4 +68,6 @@ export {
   AppSwitch,
   Popup,
   AppTabs,
+  Filter,
+  KeyboardSpacer,
 };

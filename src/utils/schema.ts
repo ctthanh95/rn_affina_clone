@@ -100,3 +100,13 @@ export const schamePersonalInformation = yup
     wardName: yup.string(),
   })
   .required();
+
+export const schameFilterIncome = yup
+  .object({
+    fromDate: yup.number().required('Vui lòng chọn ngày bắt đầu'),
+    toDate: yup.number().required('Vui lòng chọn ngày kết thúc'),
+    providerId: yup.array(),
+    programType: yup.array(),
+    cityName: yup.string(),
+  })
+  .required();

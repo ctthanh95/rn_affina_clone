@@ -1,17 +1,10 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import {AppText, AppView} from '@components';
-import {
-  BACKGROUND,
-  BLACK,
-  LIGHT_BACKGROUND,
-  PRIMARY,
-  WHITE,
-} from '@utils/colors';
+import {BLACK, LIGHT_BACKGROUND, PRIMARY, WHITE} from '@utils/colors';
 import {ms, s} from '@utils/responsive';
 import {CONTENT, LINK} from '@utils/fontStyle';
 import {LINK as LINKSCREEN} from '@navigation/screens';
-
 import {Manager, Structure} from '@utils/svg';
 import {navigate} from '@navigation/RootNavigation';
 

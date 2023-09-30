@@ -21,7 +21,7 @@ const Checkbox = ({isChecked, onCheckbox, children}: Props) => {
           {isChecked && <Check />}
         </AppView>
       </TouchableOpacity>
-      {children}
+      <AppView flex>{children}</AppView>
     </AppView>
   );
 };

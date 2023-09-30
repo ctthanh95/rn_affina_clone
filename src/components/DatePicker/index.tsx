@@ -10,7 +10,7 @@ import {ms, vs} from '@utils/responsive';
 import {formatTime} from '@utils/global';
 
 type Props = {
-  value: number | string;
+  value: number | undefined;
   label?: string;
   mode?: 'datetime' | 'date' | 'time';
   error?: any;

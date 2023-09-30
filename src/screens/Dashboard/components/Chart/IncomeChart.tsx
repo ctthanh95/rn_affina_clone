@@ -1,18 +1,18 @@
 import React, {useMemo, useState} from 'react';
-import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 import {AppText, AppView} from '@components';
 import {WIDTH, ms, s, vs} from '@utils/responsive';
-import {BLACK, PRIMARY, WHITE} from '@utils/colors';
+import {BLACK, WHITE} from '@utils/colors';
 import {CONTENT, TITLE} from '@utils/fontStyle';
 import {Filter} from '@utils/svg';
 import {getMonth, numberWithCommas} from '@utils/global';
 import moment from 'moment';
-import Svg, {Rect, Text} from 'react-native-svg';
 
 type Props = {
   data: any;
   total: number;
+  onToggleModal: () => void;
 };
 
 const DATA = {
@@ -56,7 +56,7 @@ const chartConfig = {
   useShadowColorFromDataset: false, // optional,
 };
 
-const IncomeChart = ({data, total}: Props) => {
+const IncomeChart = ({data, total, onToggleModal}: Props) => {
   const dataDate = useMemo(() => {
     const result = data.map((item: any) => moment(item.date).format('DD/MM'));
     return result;
@@ -99,10 +99,7 @@ const IncomeChart = ({data, total}: Props) => {
         <AppText style={TITLE[20]} color={WHITE}>
           Tổng quan tháng {getMonth(new Date())}
         </AppText>
-        <TouchableOpacity
-          activeOpacity={0.9}
-          //   onPress={() => showPicker(true)}
-        >
+        <TouchableOpacity activeOpacity={0.9} onPress={onToggleModal}>
           <Filter fill={WHITE} />
         </TouchableOpacity>
       </AppView>
@@ -113,7 +110,7 @@ const IncomeChart = ({data, total}: Props) => {
         <LineChart
           style={styles.chart}
           bezier
-          fromZero
+          // fromZero
           data={dataChart}
           // data={DATA}
           width={getWidthChart}

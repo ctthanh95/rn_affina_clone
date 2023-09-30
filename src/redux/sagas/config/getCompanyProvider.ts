@@ -2,22 +2,22 @@ import {call, put} from 'redux-saga/effects';
 import {createAction} from '@reduxjs/toolkit';
 import handleSaga from '../handleSaga';
 import {updateErrorSlice} from '@slices/errorSlice';
-import {getDistrictApi} from '@api/config';
+import {getCompanyProviderApi} from '@api/config';
 
-export const getDistrict = createAction('GET_DISTRICT');
+export const getCompanyProvider = createAction('GET_COMPANY_PROVIDER');
 
-export function* getDistrictSaga(options: any) {
+export function* getCompanyProviderSaga(options: any) {
   const {
     type,
-    payload: {callbackSuccess, dataGet},
+    payload: {callbackSuccess, dataPost},
   } = options;
   try {
     function* execution() {
-      const {code, message, data} = yield call(getDistrictApi, dataGet);
-
+      const {code, message, data} = yield call(getCompanyProviderApi, dataPost);
       switch (code) {
         case '200':
-          callbackSuccess(data);
+          const result = data.filter((item: any) => item.numberPackage > 0);
+          callbackSuccess(result);
           break;
         default:
           yield put(
@@ -29,7 +29,7 @@ export function* getDistrictSaga(options: any) {
           break;
       }
     }
-    yield handleSaga(execution, type);
+    yield handleSaga(execution, type, false);
   } catch (error) {
     console.log('error,', error);
   }

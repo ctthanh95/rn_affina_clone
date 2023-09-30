@@ -28,7 +28,7 @@ const Item = ({item, isLast, onSelectProvider}: TItem) => {
   );
 };
 
-const ListHomeInsurance = ({data, onSelectProvider}: TList) => {
+const Insurance = ({data, onSelectProvider}: TList) => {
   const lengthData = data.length;
   return (
     <>
@@ -56,7 +56,7 @@ const ListHomeInsurance = ({data, onSelectProvider}: TList) => {
   );
 };
 
-export default ListHomeInsurance;
+export default Insurance;
 
 const styles = StyleSheet.create({
   item: {

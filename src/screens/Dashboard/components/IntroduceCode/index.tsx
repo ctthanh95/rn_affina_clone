@@ -1,8 +1,8 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {isEmpty} from 'lodash';
 import {BottomSheetTextInput} from '@gorhom/bottom-sheet';
-import {AppButton, AppText, AppTextInput, AppView} from '@components';
+import {AppButton, AppText, AppView} from '@components';
 import {ms, vs} from '@utils/responsive';
 import {CONTENT} from '@utils/fontStyle';
 import {BLACK} from '@utils/colors';

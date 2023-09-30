@@ -13,10 +13,27 @@ const Dashboard = () => {
   const [dataContract, setDataContract] = useState([]);
   const [dataIncome, setDataIncome] = useState(null);
   const [totalBonus, setTotalBonus] = useState(0);
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const handelToggleModal = () => {
+    setModalVisible(pre => !pre);
+  };
 
   const handleBottomSheet = useCallback(() => {
     bottomSheetRef.current?.snapToIndex(0);
   }, []);
+
+  const handleGetIncomeReport = (dataPost: any) => {
+    const options: any = {
+      dataPost,
+      callbackSuccess: (data: any) => {
+        const {list, totalBonus} = data;
+        setDataIncome(list);
+        setTotalBonus(totalBonus);
+      },
+    };
+    dispatch(getIncomeReport(options));
+  };
 
   useEffect(() => {
     const options: any = {
@@ -28,21 +45,14 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    const options: any = {
-      dataPost: {
-        fromDate: moment().startOf('month').valueOf(),
-        toDate: moment().valueOf(),
-        providerId: null,
-        programType: null,
-        cityCode: null,
-      },
-      callbackSuccess: (data: any) => {
-        const {list, totalBonus} = data;
-        setDataIncome(list);
-        setTotalBonus(totalBonus);
-      },
+    const dataPost = {
+      fromDate: moment().startOf('month').valueOf(),
+      toDate: moment().valueOf(),
+      providerId: null,
+      programType: null,
+      cityCode: null,
     };
-    dispatch(getIncomeReport(options));
+    handleGetIncomeReport(dataPost);
   }, []);
   return (
     <View
@@ -51,8 +61,11 @@ const Dashboard = () => {
       dataContract={dataContract}
       introduceCode={introduceCode}
       bottomSheetRef={bottomSheetRef}
+      isModalVisible={isModalVisible}
+      onToggleModal={handelToggleModal}
       onBottomSheet={handleBottomSheet}
       setIntroduceCode={setIntroduceCode}
+      onGetIncomeReport={handleGetIncomeReport}
     />
   );
 };

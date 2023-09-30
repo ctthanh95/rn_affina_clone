@@ -1,11 +1,19 @@
 import React from 'react';
 import {ScrollView} from 'react-native';
-import {Container, AuthInfomation, AppView, AppBottomSheet} from '@components';
+import {
+  Container,
+  AuthInfomation,
+  AppView,
+  AppBottomSheet,
+  Filter,
+} from '@components';
 import {ms} from '@utils/responsive';
 import Group from './components/Group';
 import IntroduceCode from './components/IntroduceCode';
-import ContractChart from './components/ContractChart';
-import IncomeChart from './components/IncomeChart';
+import ContractChart from './components/Chart/ContractChart';
+import IncomeChart from './components/Chart/IncomeChart';
+import FilterIncome from './components/FilterIncome';
+
 import styles from './styles';
 
 type Props = {
@@ -14,8 +22,11 @@ type Props = {
   dataContract: any;
   bottomSheetRef: any;
   introduceCode: string;
+  isModalVisible: boolean;
+  onToggleModal: () => void;
   setIntroduceCode: (text: string) => void;
   onBottomSheet: () => void;
+  onGetIncomeReport: (data: any) => void;
 };
 
 const View = ({
@@ -24,8 +35,11 @@ const View = ({
   dataContract,
   bottomSheetRef,
   introduceCode,
+  isModalVisible,
+  onToggleModal,
   setIntroduceCode,
   onBottomSheet,
+  onGetIncomeReport,
 }: Props) => {
   return (
     <>
@@ -40,7 +54,11 @@ const View = ({
           <AppView paddingHorizontal={ms(23)}>
             <Group onBottomSheet={onBottomSheet} />
             {dataIncome ? (
-              <IncomeChart data={dataIncome} total={totalBonus} />
+              <IncomeChart
+                data={dataIncome}
+                total={totalBonus}
+                onToggleModal={onToggleModal}
+              />
             ) : null}
             <ContractChart dataContract={dataContract} />
           </AppView>
@@ -55,6 +73,11 @@ const View = ({
             setIntroduceCode={setIntroduceCode}
           />
         }
+      />
+      <FilterIncome
+        isModalVisible={isModalVisible}
+        onToggleModal={onToggleModal}
+        onGetIncomeReport={onGetIncomeReport}
       />
     </>
   );

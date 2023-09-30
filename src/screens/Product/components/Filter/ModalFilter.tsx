@@ -20,7 +20,7 @@ import {Close} from '@utils/svg';
 import {DATA_SHORT, GENDER_2} from '@utils/constants';
 import {schameModalFilter} from '@utils/schema';
 import {removeVietnameseTones} from '@utils/global';
-import ListHomeInsurance from './ListHomeInsurance';
+import Insurance from './Insurance';
 
 type Props = {
   data: any;
@@ -205,7 +205,7 @@ const ModalFilter = ({
             onSearch={handleSearchProvider}
             onDelete={handleResetData}
           />
-          <ListHomeInsurance
+          <Insurance
             data={dataFilter}
             onSelectProvider={handleSelectProvider}
           />

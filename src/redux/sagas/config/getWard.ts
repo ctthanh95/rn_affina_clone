@@ -3,7 +3,6 @@ import {createAction} from '@reduxjs/toolkit';
 import handleSaga from '../handleSaga';
 import {updateErrorSlice} from '@slices/errorSlice';
 import {getWardApi} from '@api/config';
-import {finishCallApiSlice} from '@slices/loadingSlice';
 
 export const getWard = createAction('GET_WARD');
 
