@@ -12,7 +12,7 @@ type Props = {
   productReportData: any;
 };
 
-const ViewProductTab = ({data, date, setDate, productReportData}: Props) => {
+const View = ({data, date, setDate, productReportData}: Props) => {
   return (
     <AppView flex>
       <ProductChart
@@ -39,7 +39,7 @@ const ViewProductTab = ({data, date, setDate, productReportData}: Props) => {
   );
 };
 
-export default ViewProductTab;
+export default View;
 
 const styles = StyleSheet.create({
   list: {

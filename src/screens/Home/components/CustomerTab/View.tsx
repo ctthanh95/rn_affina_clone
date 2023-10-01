@@ -10,19 +10,23 @@ import {ms} from '@utils/responsive';
 import {Add} from '@utils/svg';
 
 type Props = {
-  customerReportData: any;
   status: number;
-  onSetStatus: (status: number) => void;
+  customerReportData: any;
   customerListtData: any;
+  onSetStatus: (status: number) => void;
   onCreateCustomer: () => void;
+  onSearch: (key: string) => void;
+  onDelete: () => void;
 };
 
-const ViewCustomerTab = ({
-  customerReportData,
+const View = ({
   status,
-  onSetStatus,
+  customerReportData,
   customerListtData,
+  onSetStatus,
   onCreateCustomer,
+  onSearch,
+  onDelete,
 }: Props) => {
   const dataCustomer = useMemo(
     () => [
@@ -73,15 +77,15 @@ const ViewCustomerTab = ({
         status={status}
         onSetStatus={onSetStatus}
       />
-      <SearchInput />
-      <AppView style={styles.list}>
+      <SearchInput onSearch={onSearch} onDelete={onDelete} />
+      <AppView style={styles.list} flex>
         <ListCustomer data={customerListtData} />
       </AppView>
     </AppView>
   );
 };
 
-export default ViewCustomerTab;
+export default View;
 
 const styles = StyleSheet.create({
   add: {

@@ -1,6 +1,7 @@
 import React, {useCallback, useState} from 'react';
 import {StyleSheet, TouchableOpacity, TextInput} from 'react-native';
-import {debounce} from 'lodash';
+import {useFocusEffect} from '@react-navigation/native';
+import {debounce, isEmpty} from 'lodash';
 import {BLACK, PRIMARY} from '@utils/colors';
 import {ms, vs} from '@utils/responsive';
 import {Delete, Search} from '@utils/svg';
@@ -22,13 +23,20 @@ const SearchInput = ({
 }: Props) => {
   const [value, setValue] = useState('');
 
+  useFocusEffect(
+    useCallback(() => {
+      setValue('');
+    }, []),
+  );
+
   const handleDelete = () => {
     setValue('');
     if (onDelete) onDelete();
   };
 
   const handleSearch = (text: string) => {
-    if (onSearch) onSearch(text);
+    const checkNotEmpty = !isEmpty(text.trim());
+    if (onSearch && checkNotEmpty) onSearch(text);
   };
 
   const debouncedSearch = useCallback(debounce(handleSearch, 1000), []);

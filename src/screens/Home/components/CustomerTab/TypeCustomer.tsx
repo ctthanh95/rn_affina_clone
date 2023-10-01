@@ -35,32 +35,30 @@ const TypeCustomer = ({data, onSetStatus, status}: TTypeCustomer) => {
     flatListRef?.current.scrollToIndex({animated: true, index});
   };
   return (
-    <FlatList
-      style={styles.container}
-      data={data}
-      horizontal
-      ref={flatListRef}
-      showsHorizontalScrollIndicator={false}
-      keyExtractor={(item: any) => item.id}
-      renderItem={({item, index}: any) => (
-        <Item
-          item={item}
-          index={index}
-          onPress={hanldePress}
-          isSelected={item.id === status}
-          isLastItem={index === data.length - 1}
-        />
-      )}
-    />
+    <AppView marginBottom={ms(12)}>
+      <FlatList
+        data={data}
+        horizontal
+        ref={flatListRef}
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={(item: any) => item.id}
+        renderItem={({item, index}: any) => (
+          <Item
+            item={item}
+            index={index}
+            onPress={hanldePress}
+            isSelected={item.id === status}
+            isLastItem={index === data.length - 1}
+          />
+        )}
+      />
+    </AppView>
   );
 };
 
 export default TypeCustomer;
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: ms(12),
-  },
   item: {
     marginRight: ms(12),
   },

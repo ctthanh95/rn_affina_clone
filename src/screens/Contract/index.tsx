@@ -10,7 +10,6 @@ const Contract = () => {
   const [data, setData] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [keySearch, setKeySearch] = useState('');
-  const flatlistRef: any = useRef();
 
   const lengthData = data.length;
   const lastItem: any = data[lengthData - 1];

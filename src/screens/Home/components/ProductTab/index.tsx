@@ -7,7 +7,7 @@ import {selectListGroupProgram} from '@slices/configSlice';
 import {selectProgram} from '@slices/productSlice';
 import {getProductReport} from 'src/redux/sagas/report/getProductReport';
 import {getTime} from '@utils/global';
-import ViewProductTab from './ViewProductTab';
+import View from './View';
 
 const ProductTab = () => {
   const dispatch = useAppDispatch();
@@ -53,7 +53,7 @@ const ProductTab = () => {
   }, [date]);
 
   return (
-    <ViewProductTab
+    <View
       data={program}
       date={date}
       setDate={setDate}

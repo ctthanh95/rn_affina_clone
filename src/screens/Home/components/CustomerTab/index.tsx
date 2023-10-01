@@ -1,5 +1,4 @@
-import React, {useCallback, useState} from 'react';
-import {StyleSheet} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useFocusEffect} from '@react-navigation/native';
 import {getCustomerReport} from 'src/redux/sagas/report/getCustomerReport';
 import {useAppDispatch} from '@hooks/redux';
@@ -7,7 +6,14 @@ import {getCustomerList} from 'src/redux/sagas/customer/getCustomerList';
 import {updateCustomerSeenField} from 'src/redux/sagas/customer/updateCustomerSeenField';
 import {navigate} from '@navigation/RootNavigation';
 import {NEW_CUSTOMER} from '@navigation/screens';
-import ViewCustomerTab from './ViewCustomerTab';
+import View from './View';
+
+type Props = {
+  isEndReached: boolean;
+  setIsEndReached: (value: boolean) => void;
+};
+
+const LIMIT = 10;
 
 const checkUpdate = (status: number, customerReportData: any) => {
   return (
@@ -18,11 +24,13 @@ const checkUpdate = (status: number, customerReportData: any) => {
   );
 };
 
-const CustomerTab = () => {
+const CustomerTab = ({isEndReached, setIsEndReached}: Props) => {
   const dispatch = useAppDispatch();
   const [status, setStatus] = useState(1);
-  const [isSecondTime, setIsSecondTime] = useState(false);
   const [total, setTotal] = useState(0);
+  const [from, setFrom] = useState(0);
+  const [isSecondTime, setIsSecondTime] = useState(false);
+  const [keySearch, setKeySearch] = useState('');
   const [customerListtData, setCustomerListtData] = useState([]);
   const [customerReportData, setCustomerReportData] = useState({});
 
@@ -58,11 +66,12 @@ const CustomerTab = () => {
     };
     dispatch(getCustomerReport(options));
   };
-  const handleGetCustomList = () => {
+
+  const handleGetCustomListDefault = () => {
     const options: any = {
       dataGet: {
         from: 0,
-        limit: 10,
+        limit: LIMIT,
         order: 'modifiedAt',
         by: 'desc',
         status,
@@ -71,10 +80,71 @@ const CustomerTab = () => {
         setTotal(data.total);
         setCustomerListtData(data.list);
         setIsSecondTime(true);
+        setFrom(0);
       },
     };
     dispatch(getCustomerList(options));
   };
+
+  const handleSearch = (key: string) => {
+    const options: any = {
+      dataGet: {
+        from: 0,
+        limit: LIMIT,
+        order: 'modifiedAt',
+        by: 'desc',
+        status,
+        search: 'lead.name',
+        searchValue: key,
+      },
+      callbackSuccess: (data: any) => {
+        setTotal(data.total);
+        setCustomerListtData(data.list);
+        setFrom(0);
+        setKeySearch(key);
+      },
+    };
+    dispatch(getCustomerList(options));
+  };
+
+  const handleLoadMore = () => {
+    const lengthCustomerListtData = customerListtData.length;
+    if (lengthCustomerListtData < total) {
+      const step = from + LIMIT;
+      const searchValue = keySearch ? keySearch : '';
+      const options: any = {
+        dataGet: {
+          from: step,
+          limit: LIMIT,
+          order: 'modifiedAt',
+          by: 'desc',
+          status,
+          search: 'lead.name',
+          searchValue,
+        },
+        isShowLoading: false,
+        callbackSuccess: (data: any) => {
+          const newCustomerList = data?.list || [];
+          const temp: any = [...customerListtData, ...newCustomerList];
+          setCustomerListtData(temp);
+          setFrom(step);
+        },
+      };
+      dispatch(getCustomerList(options));
+    }
+  };
+
+  const handleDelete = () => {
+    handleGetCustomListDefault();
+    setKeySearch('');
+  };
+
+  useEffect(() => {
+    if (isEndReached) {
+      handleLoadMore();
+      setIsEndReached(false);
+    }
+  }, [isEndReached]);
 
   useFocusEffect(
     useCallback(() => {
@@ -84,21 +154,21 @@ const CustomerTab = () => {
 
   useFocusEffect(
     useCallback(() => {
-      handleGetCustomList();
+      handleGetCustomListDefault();
     }, [status]),
   );
 
   return (
-    <ViewCustomerTab
-      customerReportData={customerReportData}
+    <View
       status={status}
-      onSetStatus={handleSetStatus}
+      customerReportData={customerReportData}
       customerListtData={customerListtData}
+      onSetStatus={handleSetStatus}
       onCreateCustomer={handleCreateCustomer}
+      onSearch={handleSearch}
+      onDelete={handleDelete}
     />
   );
 };
 
 export default CustomerTab;
-
-const styles = StyleSheet.create({});

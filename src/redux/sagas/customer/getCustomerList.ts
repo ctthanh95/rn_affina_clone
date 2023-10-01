@@ -10,7 +10,7 @@ export const getCustomerList = createAction('GET_CUSTOM_LIST');
 export function* getCustomerListSaga(options: any) {
   const {
     type,
-    payload: {dataGet, callbackSuccess},
+    payload: {dataGet, callbackSuccess, isShowLoading = true},
   } = options;
   try {
     function* execution() {
@@ -29,7 +29,7 @@ export function* getCustomerListSaga(options: any) {
           break;
       }
     }
-    yield handleSaga(execution, type);
+    yield handleSaga(execution, type, isShowLoading);
   } catch (error) {
     console.log('error,', error);
   }

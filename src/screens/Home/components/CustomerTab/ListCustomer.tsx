@@ -8,6 +8,7 @@ import {ms} from '@utils/responsive';
 import Action from './Action';
 import Agency from './Agency';
 import Info from './Info';
+import {Empty} from '@components';
 
 const ItemCustomer = ({item}: TItem) => {
   const customerType = CUSTOMER_TYPE.find(
@@ -42,9 +43,10 @@ const ListCustomer = ({data}: TListCustomer) => {
     <FlashList
       data={data}
       estimatedItemSize={200}
+      showsVerticalScrollIndicator={false}
       keyExtractor={(item: any) => item.id}
       renderItem={({item}: any) => <ItemCustomer item={item} />}
-      showsVerticalScrollIndicator={false}
+      ListEmptyComponent={Empty}
     />
   );
 };
