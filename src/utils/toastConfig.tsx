@@ -4,8 +4,8 @@ import {CONTENT} from './fontStyle';
 
 export const toastConfig = {
   success: ({props}: any) => (
-    <AppView width={'80%'} padding={12} radius={12} backgroundColor={PRIMARY}>
-      <AppText center style={CONTENT.bold_16} color={WHITE}>
+    <AppView width={'80%'} padding={12} radius={12} backgroundColor={WHITE}>
+      <AppText center style={CONTENT.bold_16} color={PRIMARY}>
         {props.message}
       </AppText>
     </AppView>

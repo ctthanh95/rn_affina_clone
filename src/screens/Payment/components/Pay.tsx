@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {Checkbox, AppText, AppView, AppButton} from '@components';
 import {CONTENT} from '@utils/fontStyle';
@@ -6,21 +6,29 @@ import {ms} from '@utils/responsive';
 import {Right} from '@utils/svg';
 import {BLACK, WHITE} from '@utils/colors';
 
-type Props = {
-  isChecked: boolean;
+type TPay = {
   data: any;
-  onChecked: () => void;
+  onPress: (data: any) => void;
 };
 
-const Item = ({item, isChecked}: any) => {
+type TItem = {
+  item: any;
+  isChecked: boolean;
+  onPress: (data: any) => void;
+};
+
+const Item = ({item, isChecked, onPress}: TItem) => {
   const Icon = item.icon;
   return (
     <TouchableOpacity
       activeOpacity={0.9}
       disabled={!isChecked}
-      onPress={() => {
-        console.log('click');
-      }}>
+      onPress={() =>
+        onPress({
+          payment: item.id,
+          payoo: item.payoo,
+        })
+      }>
       <AppView
         row
         alignCenter
@@ -44,12 +52,18 @@ const Item = ({item, isChecked}: any) => {
   );
 };
 
-const Condition = ({isChecked, data, onChecked}: Props) => {
+const Pay = ({data, onPress}: TPay) => {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleChecked = () => {
+    setIsChecked(!isChecked);
+  };
+
   return (
     <AppView marginTop={ms(12)}>
       <Checkbox
         isChecked={isChecked}
-        onCheckbox={onChecked}
+        onCheckbox={handleChecked}
         children={
           <AppText style={[styles.regular, CONTENT.medium_14]}>
             Tôi đồng ý với{' '}
@@ -66,7 +80,12 @@ const Condition = ({isChecked, data, onChecked}: Props) => {
       />
       <AppView marginVertical={ms(20)}>
         {data.map((item: any, index: any) => (
-          <Item item={item} isChecked={isChecked} key={index} />
+          <Item
+            item={item}
+            isChecked={isChecked}
+            onPress={onPress}
+            key={index}
+          />
         ))}
       </AppView>
       <AppButton title="Yêu cầu khách hàng thanh toán" />
@@ -74,7 +93,7 @@ const Condition = ({isChecked, data, onChecked}: Props) => {
   );
 };
 
-export default Condition;
+export default Pay;
 
 const styles = StyleSheet.create({
   regular: {

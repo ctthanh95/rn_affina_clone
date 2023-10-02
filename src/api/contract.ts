@@ -12,6 +12,10 @@ export const createContractApi = (data: any) => {
   return axiosPot(CONTRACT, data);
 };
 
+export const updateContractApi = (data: any) => {
+  return axiosPut(CONTRACT, data);
+};
+
 export const getContractListApi = (data: any) => {
   return axiosDelete(CONTRACT, data);
 };

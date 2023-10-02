@@ -7,7 +7,6 @@ import {BLACK, WHITE} from '@utils/colors';
 import {ms} from '@utils/responsive';
 import {Right} from '@utils/svg';
 import {CONTENT} from '@utils/fontStyle';
-import {boolean} from 'yup';
 
 const View = () => {
   const dispatch = useAppDispatch();

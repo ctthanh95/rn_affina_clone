@@ -1,5 +1,4 @@
 import React from 'react';
-import {Text} from 'react-native';
 import {Container, AppView, AppText} from '@components';
 import {ms} from '@utils/responsive';
 import {PRIMARY, WHITE} from '@utils/colors';
@@ -8,18 +7,15 @@ import Package from './components/Package';
 import Meta from './components/Meta';
 import {PERIOD_TYPE} from '@utils/constants';
 import Form from './components/Form';
-import styles from './styles';
-import Pay from './components/Pay';
 
 type Props = {
-  companyId: string;
   data: any;
+  companyId: string;
+  voucher: string;
   dataPayment: any;
-  isChecked: boolean;
-  onChecked: () => void;
 };
 
-const View = ({companyId, data, dataPayment, isChecked, onChecked}: Props) => {
+const View = ({companyId, data, voucher, dataPayment}: Props) => {
   const {
     programName,
     packageName,
@@ -30,6 +26,7 @@ const View = ({companyId, data, dataPayment, isChecked, onChecked}: Props) => {
     period,
     periodValue,
     userId,
+    contractId,
   } = data;
 
   const dataBenefit = [...listProductMainBenefit, ...listProductSideBenefit];
@@ -64,8 +61,12 @@ const View = ({companyId, data, dataPayment, isChecked, onChecked}: Props) => {
             periodLable={periodLable}
           />
         </AppView>
-        <Form userId={userId} />
-        <Pay isChecked={isChecked} onChecked={onChecked} data={dataPayment} />
+        <Form
+          voucher={voucher}
+          userId={userId}
+          contractId={contractId}
+          dataPayment={dataPayment}
+        />
       </AppView>
     </Container>
   );

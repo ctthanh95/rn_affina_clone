@@ -1,9 +1,17 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
 import moment from 'moment';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Controller, useForm} from 'react-hook-form';
-import {AppSwitch, AppTextInput, AppView, DatePicker} from '@components';
+import {
+  AppButton,
+  AppSwitch,
+  AppTextInput,
+  AppView,
+  DatePicker,
+} from '@components';
+import Pay from './Pay';
+import {useAppDispatch} from '@hooks/redux';
+import {updateContract} from '@sagas/contract/updateContract';
 import {schemaPayment} from '@utils/schema';
 import {BLACK} from '@utils/colors';
 import {ms} from '@utils/responsive';
@@ -12,6 +20,30 @@ const TOMORROW = moment().add(1, 'days');
 const MIN_DATE = new Date(TOMORROW.format('YYYY-MM-DD'));
 const MAX_DATE = new Date(TOMORROW.add(1, 'years').format('YYYY-MM-DD'));
 
+const formatData = (
+  formData: any,
+  contractId: string,
+  isRedBill: boolean,
+  voucher: string,
+) => {
+  const {
+    redBillCompanyAddress: address,
+    redBillCompanyName: name,
+    redBillCompanyTaxNumber: tax,
+    startDate,
+  } = formData;
+  const result = {
+    contractId,
+    redBill: isRedBill ? 1 : 0,
+    startDate,
+    voucherId: voucher ? voucher : null,
+    redBillCompanyAddress: address ? address : null,
+    redBillCompanyName: name ? name : null,
+    redBillCompanyTaxNumber: tax ? tax : null,
+  };
+  return result;
+};
+
 const defaultValues = {
   startDate: TOMORROW.valueOf(),
   redBillCompanyTaxNumber: '',
@@ -19,22 +51,33 @@ const defaultValues = {
   redBillCompanyAddress: '',
 };
 
-const Form = ({userId}: Props) => {
+const Form = ({voucher, userId, contractId, dataPayment}: Props) => {
   const {
     control,
     handleSubmit,
     formState: {errors},
-    setValue,
-    getValues,
-    clearErrors,
   } = useForm({
     defaultValues,
     resolver: yupResolver(schemaPayment) as any,
   });
+  const dispatch = useAppDispatch();
   const [isRedBill, setIsRedBill] = useState(false);
 
-  const handleSwitchRedBill = () =>
-    setIsRedBill(previousState => !previousState);
+  const handleSwitchRedBill = () => setIsRedBill(pre => !pre);
+
+  const onPressPayment = (data: any, method: any) => {
+    const dataPut: any = formatData(data, contractId, isRedBill, voucher);
+    dataPut.paymentMethod = method.payment;
+
+    const options: any = {
+      dataPut,
+      callbackSuccess: (res: any) => {
+        console.log('response', res);
+      },
+    };
+    return;
+    dispatch(updateContract(options));
+  };
 
   return (
     <AppView>
@@ -70,7 +113,6 @@ const Form = ({userId}: Props) => {
           onValueChange={handleSwitchRedBill}
         />
       </AppView>
-
       {isRedBill ? (
         <AppView marginTop={ms(20)}>
           <Controller
@@ -82,6 +124,7 @@ const Form = ({userId}: Props) => {
                 value={value}
                 error={errors?.redBillCompanyTaxNumber?.message}
                 label={'Mã số thuế'}
+                keyboardType="number-pad"
               />
             )}
             name="redBillCompanyTaxNumber"
@@ -114,14 +157,16 @@ const Form = ({userId}: Props) => {
           />
         </AppView>
       ) : null}
+      <Pay data={dataPayment} onPress={handleSubmit(onPressPayment)} />
     </AppView>
   );
 };
 
 export default Form;
 
-const styles = StyleSheet.create({});
-
 type Props = {
   userId: string;
+  voucher: string;
+  contractId: string;
+  dataPayment: any;
 };
