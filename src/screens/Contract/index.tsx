@@ -26,7 +26,7 @@ const Contract = () => {
   const onRefresh = () => {
     setRefreshing(true);
     setKeySearch('');
-    handleGetContractListDefault();
+    handleGetContractListDefault(false);
   };
 
   const handleLoadMore = () => {
@@ -74,13 +74,13 @@ const Contract = () => {
     }
   };
 
-  const handleGetContractListDefault = () => {
+  const handleGetContractListDefault = (isShowLoading = true) => {
     const options: any = {
       dataDelete: {
         limit: 5,
         status: [status],
       },
-      isShowLoading: true,
+      isShowLoading: isShowLoading,
       callbackSuccess: (data: any) => {
         setData(data);
         setRefreshing(false);

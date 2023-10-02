@@ -60,7 +60,7 @@ const SignIn = () => {
         setOTPCode('');
       },
       callbackSuccess: () => {
-        if (isBiometrics === null) {
+        if (!isBiometrics) {
           handleToggleModal();
         } else {
           replace(AUTH_STACK);
