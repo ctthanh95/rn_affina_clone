@@ -2,15 +2,16 @@ import React, {useEffect, useState} from 'react';
 import {useRoute} from '@react-navigation/native';
 import {useAppDispatch} from '@hooks/redux';
 import {getProductDetail} from '@sagas/product/getProductDetail';
+import {createContract} from '@sagas/contract/createContract';
 import {getTerms} from '@sagas/contract/getTerms';
-import View from './view';
 import {navigate} from '@navigation/RootNavigation';
-import {BUYER} from '@navigation/screens';
+import {BUYER, PAYMENT} from '@navigation/screens';
+import View from './view';
 
 const DetailProduct = () => {
   const dispatch = useAppDispatch();
   const route = useRoute();
-  const {filter} = route.params as any;
+  const {filter, type, dataContract} = route.params as any;
   const [data, setData] = useState<any>({});
   const [menuSeleted, setMenuSeleted] = useState(filter.id);
   const [dataFilter, setDataFilter] = useState(filter);
@@ -84,6 +85,35 @@ const DetailProduct = () => {
     navigate(BUYER, dataSubmit);
   };
 
+  const handlePayment = () => {
+    const dataPost = {
+      ...dataContract,
+      period: feeInsuranceSelect.periodType,
+      periodValue: feeInsuranceSelect.periodValue,
+      productId: data.id,
+      listProductSideBenefit: cart.length > 0 ? cart : null,
+    };
+    const options: any = {
+      dataPost,
+      callbackSuccess: (data: any) => {
+        navigate(PAYMENT, {
+          data,
+          companyId: data.companyId,
+          voucher: voucher || null,
+        });
+      },
+    };
+    dispatch(createContract(options));
+  };
+
+  const handleSubmit = () => {
+    if (type === 'product') {
+      hanldeBuyInsurance();
+    } else {
+      handlePayment();
+    }
+  };
+
   const handleVoucher = (code: string) => {
     setVoucher(code);
   };
@@ -92,7 +122,6 @@ const DetailProduct = () => {
     <View
       data={data}
       dataTerms={dataTerms}
-      menuSeleted={menuSeleted}
       feeInsuranceSelect={feeInsuranceSelect}
       fee={fee}
       voucher={voucher}
@@ -100,7 +129,7 @@ const DetailProduct = () => {
       onSetFee={hanldeSetFee}
       onDataFilter={handleDataFilter}
       onFeeInsuranceSelect={handleFeeInsuranceSelect}
-      onBuyInsurance={hanldeBuyInsurance}
+      onSubmit={handleSubmit}
     />
   );
 };

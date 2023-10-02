@@ -1,21 +1,18 @@
-import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {AppText, AppView} from '@components';
-import {CONTENT, TITLE} from '@utils/fontStyle';
+import React from 'react';
+import {StyleSheet} from 'react-native';
+import {AppTabs, AppText, AppView} from '@components';
+import {TITLE} from '@utils/fontStyle';
 import {BLACK} from '@utils/colors';
-import Menu from './Menu';
 import {ms} from '@utils/responsive';
 import ListMainBenefit from './ListMainBenefit';
 
 type Props = {
-  menuSeleted: string;
   listProductInProgram: any;
   listProductMainBenefit: any;
   onDataFilter: (id: string) => void;
 };
 
 const MainBenefit = ({
-  menuSeleted,
   listProductInProgram,
   listProductMainBenefit,
   onDataFilter,
@@ -25,10 +22,10 @@ const MainBenefit = ({
       <AppText style={TITLE[20]} color={BLACK[50]} marginBottom={ms(16)}>
         Quyền Lợi Chính
       </AppText>
-      <Menu
+      <AppTabs
         data={listProductInProgram}
-        menuSeleted={menuSeleted}
-        onMenuSelected={onDataFilter}
+        keyLabel="packageName"
+        onPress={onDataFilter}
       />
       <ListMainBenefit data={listProductMainBenefit} />
     </AppView>

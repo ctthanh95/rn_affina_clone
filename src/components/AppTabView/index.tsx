@@ -12,7 +12,7 @@ type Props = {
   onSelected?: (index: number) => void;
 };
 
-const AppTabBar = ({
+const AppTabView = ({
   routes,
   renderScene,
   width = 'auto',
@@ -55,7 +55,7 @@ const AppTabBar = ({
   );
 };
 
-export default memo(AppTabBar);
+export default memo(AppTabView);
 
 const styles = StyleSheet.create({
   background: {

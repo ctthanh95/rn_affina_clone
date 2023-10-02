@@ -6,7 +6,6 @@ import {REFERRAL_CODE} from '@navigation/screens';
 const CreateAccount = () => {
   const handleSubmit = (data: any) => {
     navigate(REFERRAL_CODE);
-    console.log(data);
   };
   return <View onSubmit={handleSubmit} />;
 };

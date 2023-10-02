@@ -7,7 +7,7 @@ type Props = {};
 
 const Loading = (props: Props) => {
   return (
-    <AppView flex center backgroundColor={BLACK[50]} absoluteFull>
+    <AppView flex center backgroundColor={BLACK[30]} absoluteFull>
       <ActivityIndicator size="large" color={PRIMARY} />
     </AppView>
   );

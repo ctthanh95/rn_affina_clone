@@ -39,7 +39,7 @@ const Sumary = ({title, data = {}, onPress}: TSumary) => {
     address,
   } = data;
   return (
-    <>
+    <AppView paddingHorizontal={ms(23)}>
       <AppView row alignCenter justifySpaceBetween>
         <AppText style={TITLE[24]} color={PRIMARY} marginTop={ms(8)}>
           {title}
@@ -68,7 +68,7 @@ const Sumary = ({title, data = {}, onPress}: TSumary) => {
         <Item title="Email" content={email} />
         <Item title="Địa chỉ" content={address} isWhite={false} />
       </AppView>
-    </>
+    </AppView>
   );
 };
 

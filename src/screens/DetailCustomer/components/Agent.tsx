@@ -1,14 +1,16 @@
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import {AppView, AppText} from '@components';
-import {WHITE, BLACK} from '@utils/colors';
+import {WHITE, BLACK, LIGHT_BACKGROUND} from '@utils/colors';
 import {CONTENT} from '@utils/fontStyle';
-import {ms} from '@utils/responsive';
-import {Edit} from '@utils/svg';
+import {ms, s} from '@utils/responsive';
+import {Edit, User} from '@utils/svg';
 
-type Props = {};
+type Props = {
+  saleName: string;
+};
 
-const Agent = (props: Props) => {
+const Agent = ({saleName}: Props) => {
   return (
     <AppView
       row
@@ -25,12 +27,15 @@ const Agent = (props: Props) => {
           Phụ trách chính bởi
         </AppText>
         <AppText style={CONTENT.bold_16} color={BLACK[100]}>
-          Phụ trách chính bởi
+          {saleName}
         </AppText>
       </AppView>
-      <TouchableOpacity activeOpacity={0.9}>
+      <AppView circle={s(64)} backgroundColor={LIGHT_BACKGROUND} center>
+        <User width={s(36)} height={s(36)} />
+      </AppView>
+      {/* <TouchableOpacity activeOpacity={0.9}>
         <Edit />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </AppView>
   );
 };

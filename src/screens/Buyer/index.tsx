@@ -6,8 +6,7 @@ import {RECEIVER} from '@navigation/screens';
 
 const Buyer = () => {
   const route = useRoute();
-  const params = route.params;
-  const {cart, companyId} = params as any;
+  const {cart, companyId} = route.params as any;
   const handleSubmit = (data: any) => {
     navigate(RECEIVER, {
       buyer: data,

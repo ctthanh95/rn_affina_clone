@@ -32,6 +32,22 @@ const View = ({data, status, onUpdateStatus, onUpdateCustomer}: Props) => {
     address: data.address,
   };
 
+  const dataBuyer = {
+    address: data?.address,
+    cityCode: data?.cityCode,
+    districtsCode: data?.districtsCode,
+    dob: data?.dob,
+    email: data?.email,
+    gender: data?.gender,
+    license: data?.license,
+    licenseType: data?.licenseType,
+    licenseTypeName: DATA_LICENSE_TYPE[data?.licenseType],
+    name: data?.name,
+    phone: data?.phone,
+    upload: {backSide: {}, frontSide: {}},
+    wardsCode: data?.wardsCode,
+  };
+
   const dataInfoConvert = convertObjectToArray(dataInfo);
 
   const handleOpenBottomSheet = () => {
@@ -49,7 +65,7 @@ const View = ({data, status, onUpdateStatus, onUpdateCustomer}: Props) => {
         <AppView paddingHorizontal={ms(23)} flex marginTop={ms(16)}>
           <Tags status={status} onOpenBottomSheet={handleOpenBottomSheet} />
           <Info name={data?.name} createdAt={data?.createdAt} />
-          <Agent />
+          <Agent saleName={data?.saleName} />
           <Profile data={dataInfoConvert} onUpdateCustomer={onUpdateCustomer} />
           <AppText style={TITLE[20]} color={PRIMARY} marginTop={ms(16)}>
             Danh Sách Hợp đồng
@@ -57,7 +73,7 @@ const View = ({data, status, onUpdateStatus, onUpdateCustomer}: Props) => {
           <AppView height={vs(200)} />
         </AppView>
       </Container>
-      <Action phone={data.phone} />
+      <Action phone={data.phone} dataBuyer={dataBuyer} />
       <AppBottomSheet
         sheetRef={sheetRef}
         children={<Modal onSelectItem={handleSelectItem} status={status} />}

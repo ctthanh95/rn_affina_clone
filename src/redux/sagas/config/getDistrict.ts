@@ -29,7 +29,7 @@ export function* getDistrictSaga(options: any) {
           break;
       }
     }
-    yield handleSaga(execution, type);
+    yield handleSaga(execution, type, false);
   } catch (error) {
     console.log('error,', error);
   }

@@ -1,6 +1,13 @@
-import {StyleSheet, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
-import {AppText, AppTextInput, AppView, Blur, AppButton} from '@components';
+import {StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  AppText,
+  AppTextInput,
+  AppView,
+  Blur,
+  AppButton,
+  KeyboardSpacer,
+} from '@components';
 import {ms, s} from '@utils/responsive';
 import {BLACK} from '@utils/colors';
 import {CONTENT} from '@utils/fontStyle';
@@ -22,7 +29,7 @@ const Cart = ({
   voucher,
   onVoucher,
   onBottomSheet,
-  onBuyInsurance,
+  onSubmit,
 }: Props) => {
   const [isShowInput, setisShowInput] = useState(false);
 
@@ -92,7 +99,8 @@ const Cart = ({
           {numberWithCommas(fee)} đ
         </AppText>
       </AppView>
-      <AppButton title="Mua bảo hiểm" onPress={onBuyInsurance} />
+      <AppButton title="Mua bảo hiểm" onPress={onSubmit} />
+      <KeyboardSpacer topSpacing={130} />
     </AppView>
   );
 };
@@ -107,5 +115,5 @@ type Props = {
   voucher: string;
   onVoucher: (code: string) => void;
   onBottomSheet: () => void;
-  onBuyInsurance: () => void;
+  onSubmit: () => void;
 };

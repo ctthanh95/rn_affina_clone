@@ -1,5 +1,5 @@
 import {css} from '@emotion/native';
-import {FC, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {
   Keyboard,
   KeyboardEvent,
@@ -8,7 +8,6 @@ import {
   Platform,
   useWindowDimensions,
   View,
-  ViewProps,
 } from 'react-native';
 
 const defaultAnimation: LayoutAnimationConfig = {
@@ -24,9 +23,16 @@ const defaultAnimation: LayoutAnimationConfig = {
   },
 };
 
-const KeyboardSpacer: FC<ViewProps> = () => {
+type Props = {
+  // height current + height keyboard then / 2
+  topSpacing?: number;
+};
+
+const KeyboardSpacer = ({topSpacing = 0}: Props) => {
   const {height: screenHeight} = useWindowDimensions();
   const [keyboardSpace, setKeyboardSpace] = useState(0);
+
+  const isIos = Platform.OS === 'ios';
 
   useEffect(() => {
     const updateKeyboardSpace = (event: KeyboardEvent) => {
@@ -35,7 +41,7 @@ const KeyboardSpacer: FC<ViewProps> = () => {
       }
 
       let animationConfig = defaultAnimation;
-      if (Platform.OS === 'ios') {
+      if (isIos) {
         animationConfig = LayoutAnimation.create(
           event.duration,
           LayoutAnimation.Types[event.easing],
@@ -43,14 +49,15 @@ const KeyboardSpacer: FC<ViewProps> = () => {
         );
       }
       LayoutAnimation.configureNext(animationConfig);
-
-      const keyboardSpace = screenHeight - event.endCoordinates.screenY;
+      const calculateTopSpacing = isIos ? 0 : topSpacing;
+      const keyboardSpace =
+        screenHeight - event.endCoordinates.screenY - calculateTopSpacing;
       setKeyboardSpace(keyboardSpace);
     };
 
     const resetKeyboardSpace = (event: KeyboardEvent) => {
       let animationConfig = defaultAnimation;
-      if (Platform.OS === 'ios') {
+      if (isIos) {
         animationConfig = LayoutAnimation.create(
           event.duration,
           LayoutAnimation.Types[event.easing],
@@ -62,10 +69,8 @@ const KeyboardSpacer: FC<ViewProps> = () => {
       setKeyboardSpace(0);
     };
 
-    const updateListener =
-      Platform.OS === 'android' ? 'keyboardDidShow' : 'keyboardWillShow';
-    const resetListener =
-      Platform.OS === 'android' ? 'keyboardDidHide' : 'keyboardWillHide';
+    const updateListener = isIos ? 'keyboardWillShow' : 'keyboardDidShow';
+    const resetListener = isIos ? 'keyboardWillHide' : 'keyboardDidHide';
 
     const listeners = [
       Keyboard.addListener(updateListener, updateKeyboardSpace),

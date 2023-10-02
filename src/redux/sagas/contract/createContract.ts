@@ -14,7 +14,6 @@ export function* createContractSaga(options: any) {
   try {
     function* execution() {
       const {code, message, data} = yield call(createContractApi, dataPost);
-      console.log(code, message);
       switch (code) {
         case '200':
           callbackSuccess(data);

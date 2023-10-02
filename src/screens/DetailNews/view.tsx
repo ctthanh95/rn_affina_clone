@@ -1,8 +1,14 @@
 import React, {useState} from 'react';
-import {Platform, TouchableOpacity} from 'react-native';
+import {Platform, ScrollView, TouchableOpacity} from 'react-native';
 import RenderHtml from 'react-native-render-html';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
-import {AppImage, AppText, AppTextInput, AppView, Container} from '@components';
+import {
+  AppImage,
+  AppText,
+  AppTextInput,
+  AppView,
+  Container,
+  KeyboardSpacer,
+} from '@components';
 import {WIDTH, ms, width} from '@utils/responsive';
 import {CONTENT} from '@utils/fontStyle';
 import {BLACK, WHITE} from '@utils/colors';
@@ -39,14 +45,13 @@ const View = ({newsName, data, listComment, onPostComment}: Props) => {
   const isIos = Platform.OS === 'ios';
 
   const handleOnToggle = (keyboardState: any, keyboardSpace: any) => {
-    console.log(keyboardState, keyboardSpace);
     setIsKeyboard(keyboardState);
     setHeightKeyboard(keyboardSpace);
   };
 
   return (
-    <>
-      <Container isAuth title={newsName} isScrollView>
+    <Container isAuth title={newsName}>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <AppView flex marginTop={ms(12)}>
           <AppImage uri={newsImage2} style={styles.image} />
           <AppView padding={ms(23)}>
@@ -75,33 +80,30 @@ const View = ({newsName, data, listComment, onPostComment}: Props) => {
               {`Bình luận (${listComment.length})`}
             </AppText>
             <Comment data={listComment} />
-            <AppView height={100} />
-            {isKeyboard ? <AppView height={heightKeyboard} /> : null}
           </AppView>
         </AppView>
-      </Container>
+      </ScrollView>
       <AppView
         padding={ms(23)}
-        absolute
-        bottom={0}
-        width="100%"
-        backgroundColor={WHITE}>
+        backgroundColor={WHITE}
+        onLayout={event => {
+          var {x, y, width, height} = event.nativeEvent.layout;
+          console.log('height: ' + height);
+        }}>
         <AppTextInput
           value={text}
           onChangeText={setText}
           placeholder="Ý kiến của bạn"
+          marginBottom={0}
           contentRight={
             <TouchableOpacity activeOpacity={0.9} onPress={onPress}>
               <Send />
             </TouchableOpacity>
           }
         />
-        <KeyboardSpacer
-          onToggle={handleOnToggle}
-          topSpacing={isIos ? 0 : -230}
-        />
+        <KeyboardSpacer topSpacing={228} />
       </AppView>
-    </>
+    </Container>
   );
 };
 

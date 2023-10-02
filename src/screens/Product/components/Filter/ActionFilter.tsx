@@ -13,13 +13,15 @@ type Props = {
 
 const FilterData = ({onModal, onSearch, onResetData}: Props) => {
   return (
-    <AppView marginBottom={ms(20)}>
+    <AppView>
       <AppView row alignCenter>
         <AppView flex marginRight={ms(12)}>
           <SearchInput onSearch={onSearch} onDelete={onResetData} />
         </AppView>
         <TouchableOpacity activeOpacity={0.9} onPress={onModal}>
-          <Filter fill={PRIMARY} />
+          <AppView marginBottom={ms(20)}>
+            <Filter fill={PRIMARY} />
+          </AppView>
         </TouchableOpacity>
       </AppView>
     </AppView>

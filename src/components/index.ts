@@ -18,7 +18,7 @@ import SearchInput from './SearchInput';
 import Gradient from './Gradient';
 import Circle from './Circle';
 import BottomSheetProvince from './BottomSheetProvince';
-import AppTabBar from './AppTabBar';
+import AppTabView from './AppTabView';
 import Error from './Error';
 import Internet from './Internet';
 import AppBottomSheet from './AppBottomSheet';
@@ -55,7 +55,7 @@ export {
   Gradient,
   Circle,
   BottomSheetProvince,
-  AppTabBar,
+  AppTabView,
   Error,
   Internet,
   AppBottomSheet,

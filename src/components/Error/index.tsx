@@ -23,7 +23,6 @@ const Error = () => {
   const isError = useAppSelector(selectIsError);
 
   const handleToggleModal = () => {
-    console.log('handleToggleModal');
     dispatch(hideErrorSlice());
   };
 

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {SceneMap} from 'react-native-tab-view';
-import {AppView, Container, AppTabBar} from '@components';
+import {AppView, Container, AppTabView} from '@components';
 import {ms, width} from '@utils/responsive';
 import InformationTab from './components/InformationTab';
 import ProductTab from './components/ProductTab';
@@ -21,7 +21,7 @@ const View = (props: Props) => {
   return (
     <Container isAuth title="Hồ sơ công việc">
       <AppView flex marginHorizontal={ms(23)}>
-        <AppTabBar
+        <AppTabView
           routes={routes}
           renderScene={renderScene}
           width={(width - ms(23 * 2)) / 2}

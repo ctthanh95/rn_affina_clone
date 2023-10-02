@@ -34,10 +34,8 @@ const DATA_METHOD_PAYMENT = [
 const Payment = () => {
   const dispatch = useAppDispatch();
   const route = useRoute();
+  const {data, companyId, voucher} = route.params as any;
   const [isChecked, setIsChecked] = useState(false);
-  const params = route.params;
-  const {data, companyId, voucher} = params as any;
-  console.log(data);
 
   const handleChecked = () => {
     setIsChecked(!isChecked);

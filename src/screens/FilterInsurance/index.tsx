@@ -9,7 +9,7 @@ import View from './view';
 const FilterInsurance = () => {
   const route = useRoute();
   const dispatch = useAppDispatch();
-  const {item} = route.params as any;
+  const {item, type, dataContract} = route.params as any;
   const handleSubmit = (formData: any) => {
     const {dob, gender} = formData;
     const options: any = {
@@ -24,6 +24,8 @@ const FilterInsurance = () => {
           dob,
           item,
           gender,
+          type,
+          dataContract,
           // typeBuyer: params?.typeBuyer || null,
           // infoBuyerAndInsuredPerson: params?.infoBuyerAndInsuredPerson || null,
           // fromLead: params?.fromLead || null

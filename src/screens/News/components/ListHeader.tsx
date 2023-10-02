@@ -10,7 +10,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import {AppView} from '@components';
 import ItemHot from './ItemHot';
-import {WIDTH, ms, width} from '@utils/responsive';
+import {WIDTH, ms} from '@utils/responsive';
 import {BLACK, SELECT_BUTTON} from '@utils/colors';
 
 type TListHeader = {

@@ -27,15 +27,9 @@ type Props = {onSubmit: (data: any) => void};
 const Description = () => (
   <AppText style={[styles.regular, CONTENT.medium_14]}>
     Tôi đồng ý với{' '}
-    <AppText
-      style={[CONTENT.bold_14, styles.bold]}
-      onPress={() => console.log('aaaa')}>
-      điều khoản sử dụng
-    </AppText>
+    <AppText style={[CONTENT.bold_14, styles.bold]}>điều khoản sử dụng</AppText>
     <AppText> và </AppText>
-    <AppText
-      style={[CONTENT.bold_14, styles.bold]}
-      onPress={() => console.log('aaaa')}>
+    <AppText style={[CONTENT.bold_14, styles.bold]}>
       chính sách bảo mật{' '}
     </AppText>
     <AppText> của Affina</AppText>

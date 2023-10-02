@@ -14,6 +14,7 @@ const View = ({
   menuSeleted,
   isFilterVisible,
   isProgramVisible,
+  refreshing,
   onMenuSelected,
   onModalFilter,
   onModalProgram,
@@ -22,6 +23,7 @@ const View = ({
   onSubmit,
   onProgramSelected,
   onProductDetail,
+  onRefresh,
 }: Props) => {
   return (
     <>
@@ -42,7 +44,12 @@ const View = ({
               onSearch={onSearch}
               onResetData={onResetData}
             />
-            <ListProduct data={product} onProductDetail={onProductDetail} />
+            <ListProduct
+              data={product}
+              onProductDetail={onProductDetail}
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+            />
           </AppView>
         </DismissKeyboard>
       </Container>
@@ -70,6 +77,7 @@ type Props = {
   menuSeleted: string;
   isFilterVisible: boolean;
   isProgramVisible: boolean;
+  refreshing: boolean;
   onModalFilter: () => void;
   onModalProgram: () => void;
   onMenuSelected: (item: any) => void;
@@ -78,4 +86,5 @@ type Props = {
   onSubmit: (data: any) => void;
   onProgramSelected: (data: any) => void;
   onProductDetail: (id: string) => void;
+  onRefresh: () => void;
 };

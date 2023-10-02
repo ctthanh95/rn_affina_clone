@@ -1,9 +1,10 @@
 import React from 'react';
-import View from './view';
+import Toast from 'react-native-toast-message';
 import {useAppDispatch} from '@hooks/redux';
 import {goBack} from '@navigation/RootNavigation';
 import {useRoute} from '@react-navigation/native';
 import {updateCustomer} from 'src/redux/sagas/customer/updateCustomer';
+import View from './view';
 
 const UpdateCustomer = () => {
   const dispatch = useAppDispatch();
@@ -14,6 +15,12 @@ const UpdateCustomer = () => {
     const options: any = {
       dataPut,
       callbackSuccess: (data: any) => {
+        Toast.show({
+          type: 'success',
+          props: {
+            message: 'Cập nhật thông tin thành công!',
+          },
+        });
         goBack();
       },
     };

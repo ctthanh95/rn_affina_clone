@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, FlatList} from 'react-native';
-import {AppView} from '@components';
+import {Empty} from '@components';
 import ItemNormal from './ItemNormal';
 import ListHeader from './ListHeader';
 
@@ -17,15 +17,14 @@ const ListNews = ({data}: Props) => {
   ) : null;
 
   return (
-    <AppView flex>
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        data={dataNormal}
-        renderItem={({item}: any) => <ItemNormal item={item} />}
-        keyExtractor={(item: any) => item.newsId}
-        ListHeaderComponent={ListHeaderComponent}
-      />
-    </AppView>
+    <FlatList
+      showsVerticalScrollIndicator={false}
+      data={dataNormal}
+      renderItem={({item}: any) => <ItemNormal item={item} />}
+      keyExtractor={(item: any) => item.newsId}
+      ListHeaderComponent={ListHeaderComponent}
+      ListEmptyComponent={Empty}
+    />
   );
 };
 

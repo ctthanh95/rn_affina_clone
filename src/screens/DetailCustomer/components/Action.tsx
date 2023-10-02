@@ -5,18 +5,27 @@ import {WHITE} from '@utils/colors';
 import {ms, s} from '@utils/responsive';
 import {Phone, Chat_Outline} from '@utils/svg';
 import {navigate} from '@navigation/RootNavigation';
-import {CHAT} from '@navigation/screens';
+import {CHAT, RECEIVER} from '@navigation/screens';
 
 type Props = {
   phone: string;
+  dataBuyer: any;
 };
 
-const Action = ({phone}: Props) => {
+const Action = ({phone, dataBuyer}: Props) => {
   const handleCall = () => {
     if (phone) Linking.openURL(`tel:${phone}`);
   };
   const handleChat = () => {
     navigate(CHAT);
+  };
+
+  const handleReceiver = () => {
+    navigate(RECEIVER, {
+      cart: null,
+      companyId: null,
+      buyer: dataBuyer,
+    });
   };
   return (
     <AppView
@@ -43,7 +52,7 @@ const Action = ({phone}: Props) => {
         </AppView>
       </TouchableOpacity>
       <AppView flex>
-        <AppButton title="Tạo hợp đồng mới" />
+        <AppButton title="Tạo hợp đồng mới" onPress={handleReceiver} />
       </AppView>
     </AppView>
   );

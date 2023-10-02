@@ -41,6 +41,8 @@ const SectionListProduct = ({title, type, data}: Props) => {
     if (type === 0) {
       navigate(FILTER_INSURANCE, {
         item,
+        type: 'product',
+        dataContract: null,
       });
     }
   };

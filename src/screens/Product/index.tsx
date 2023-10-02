@@ -11,7 +11,7 @@ import {DETAIL_PRODUCT} from '@navigation/screens';
 const Product = () => {
   const route = useRoute();
   const dispatch = useAppDispatch();
-  const {data, dob, gender, item} = route.params as any;
+  const {data, dob, gender, item, type, dataContract} = route.params as any;
   //Modal
   const [isFilterVisible, setFilterVisible] = useState(false);
   const [isProgramVisible, setProgramVisible] = useState(false);
@@ -30,6 +30,13 @@ const Product = () => {
     dob,
     gender,
   });
+  const [refreshing, setRefreshing] = useState(false);
+
+  const handleRefresh = () => {
+    setRefreshing(true);
+    setProductFilterData(productData);
+    setRefreshing(false);
+  };
 
   const handleModalFilter = () => {
     setFilterVisible(!isFilterVisible);
@@ -115,6 +122,8 @@ const Product = () => {
         id,
         ...filter,
       },
+      type,
+      dataContract,
     });
   };
 
@@ -126,6 +135,7 @@ const Product = () => {
       product={productFilterData}
       isFilterVisible={isFilterVisible}
       isProgramVisible={isProgramVisible}
+      refreshing={refreshing}
       onModalFilter={handleModalFilter}
       onModalProgram={handleModalProgram}
       onMenuSelected={handleMenuSeleted}
@@ -134,6 +144,7 @@ const Product = () => {
       onSubmit={handleSubmit}
       onProgramSelected={handleProgramSelected}
       onProductDetail={handleProductDetail}
+      onRefresh={handleRefresh}
     />
   );
 };

@@ -13,8 +13,11 @@ import Sumary from './Sumary';
 import {PRIMARY} from '@utils/colors';
 import {TITLE} from '@utils/fontStyle';
 import {ms} from '@utils/responsive';
+import {useAppSelector} from '@hooks/redux';
+import {selectListGroupProgram} from '@slices/configSlice';
 
 type Props = {
+  cart: any;
   dataBuyer: any;
   dataReceiver: any;
   isOnePerson: boolean;
@@ -22,9 +25,11 @@ type Props = {
   onDataReReceicer: (data: any) => void;
   onReplaceView: (type: string) => void;
   onPayment: () => void;
+  onFilterInsurance: () => void;
 };
 
 const Create = ({
+  cart,
   dataBuyer,
   dataReceiver,
   isOnePerson,
@@ -32,6 +37,7 @@ const Create = ({
   onDataReReceicer,
   onReplaceView,
   onPayment,
+  onFilterInsurance,
 }: Props) => {
   const isEmptyDataReceiver = isEmpty(dataReceiver);
 
@@ -46,14 +52,14 @@ const Create = ({
   return (
     <>
       <Container isAuth title="Tạo hợp đồng" isScrollView>
-        <AppView paddingHorizontal={ms(23)}>
-          <Sumary
-            title="Người mua bảo hiểm"
-            data={dataBuyer}
-            onPress={() => onReplaceView('buyer')}
-          />
-          {isEmptyDataReceiver ? (
-            <AppView marginTop={ms(16)}>
+        <Sumary
+          title="Người mua bảo hiểm"
+          data={dataBuyer}
+          onPress={() => onReplaceView('buyer')}
+        />
+        {isEmptyDataReceiver ? (
+          <>
+            <AppView marginTop={ms(16)} paddingHorizontal={ms(23)}>
               <AppText style={TITLE[24]} color={PRIMARY}>
                 Người được bảo hiểm
               </AppText>
@@ -63,37 +69,46 @@ const Create = ({
                 onValueChange={onSwitch}
               />
             </AppView>
-          ) : (
-            <AppView marginTop={ms(16)} marginBottom={ms(20)}>
-              <Sumary
-                title="Người được bảo hiểm"
-                data={dataReceiver}
-                onPress={() => onReplaceView('receiver')}
+            {isOnePerson ? null : (
+              <FormUser
+                onSubmit={handleSubmit}
+                title="Tiếp tục"
+                isCodeClient={false}
+                isRelationship={true}
               />
-            </AppView>
-          )}
-        </AppView>
-        {isEmptyDataReceiver && !isOnePerson ? (
-          <FormUser
-            onSubmit={handleSubmit}
-            title="Tiếp tục"
-            isCodeClient={false}
-            isRelationship={true}
-          />
+            )}
+          </>
         ) : (
-          <></>
+          <AppView marginTop={ms(16)} marginBottom={ms(20)}>
+            <Sumary
+              title="Người được bảo hiểm"
+              data={dataReceiver}
+              onPress={() => onReplaceView('receiver')}
+            />
+          </AppView>
         )}
       </Container>
-      {!isEmptyDataReceiver ? (
-        <AppView paddingHorizontal={ms(23)}>
-          <AppButton title="thanh toán" onPress={onPayment} />
-        </AppView>
-      ) : null}
-      {isEmptyDataReceiver && isOnePerson ? (
-        <AppView paddingHorizontal={ms(23)}>
-          <AppButton title="Tiếp tục" onPress={handleContinue} />
-        </AppView>
-      ) : null}
+      {isEmptyDataReceiver ? (
+        <>
+          {isOnePerson ? (
+            <AppView paddingHorizontal={ms(23)}>
+              <AppButton title="Tiếp tục" onPress={handleContinue} />
+            </AppView>
+          ) : null}
+        </>
+      ) : (
+        <>
+          {cart ? (
+            <AppView paddingHorizontal={ms(23)}>
+              <AppButton title="thanh toán" onPress={onPayment} />
+            </AppView>
+          ) : (
+            <AppView paddingHorizontal={ms(23)}>
+              <AppButton title="Tiếp tục" onPress={onFilterInsurance} />
+            </AppView>
+          )}
+        </>
+      )}
     </>
   );
 };

@@ -11,7 +11,14 @@ import {AppText, AppView} from '@components';
 import {ms} from '@utils/responsive';
 import {BLACK, PRIMARY} from '@utils/colors';
 import {Down, Right} from '@utils/svg';
-import {TITLE} from '@utils/fontStyle';
+import {CONTENT, TITLE} from '@utils/fontStyle';
+
+const tagsStyles = {
+  p: {
+    ...CONTENT.semibold_14,
+    color: BLACK[100],
+  },
+};
 
 const Item = ({title, content, isLine = true}: TItem) => {
   const {width} = useWindowDimensions();
@@ -34,7 +41,11 @@ const Item = ({title, content, isLine = true}: TItem) => {
       </AppView>
       {isShow && (
         <AppView marginBottom={ms(16)}>
-          <RenderHtml contentWidth={width} source={source} />
+          <RenderHtml
+            contentWidth={width}
+            source={source}
+            tagsStyles={tagsStyles}
+          />
         </AppView>
       )}
       {isLine && <AppView height={1} backgroundColor={BLACK[10]} />}

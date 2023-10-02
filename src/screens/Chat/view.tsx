@@ -1,6 +1,6 @@
 import React from 'react';
 import WebView from 'react-native-webview';
-import {Container, AuthInfomation, AppView} from '@components';
+import {Container, AuthInfomation, AppView, Loading} from '@components';
 import {WHITE} from '@utils/colors';
 
 type Props = {};
@@ -31,6 +31,8 @@ const View = (props: Props) => {
         <WebView
           originWhitelist={['*']}
           source={{html, baseUrl: 'https://omnisales.worldfone.vn'}}
+          startInLoadingState={true}
+          renderLoading={() => <Loading />}
         />
       </AppView>
     </Container>

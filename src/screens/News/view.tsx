@@ -1,11 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {
-  AppView,
-  AuthInfomation,
-  Container,
-  Empty,
-  AppTabBar,
-} from '@components';
+import React from 'react';
+import {AppView, AuthInfomation, Container, AppTabs} from '@components';
 import ListNews from './components/ListNews';
 import {ms} from '@utils/responsive';
 
@@ -16,40 +10,23 @@ type Props = {
 };
 
 const View = ({dataTopic, dataNews, onSelectedTopic}: Props) => {
-  const [routes, setRoutes] = useState<any>([]);
   const lengthDataTopic = dataTopic.length;
-  const lengthRoutes = routes.length;
-
-  const handleSelected = (index: number) => {
-    const id = routes[index].key;
-    onSelectedTopic(id);
-  };
-
-  useEffect(() => {
-    if (lengthDataTopic) {
-      const result = dataTopic.map((item: any) => ({
-        key: item.id,
-        title: item.name,
-      }));
-      setRoutes(result);
-    }
-  }, [dataTopic]);
-
-  const renderScene = () => <ListNews data={dataNews} />;
-
   return (
     <Container>
       <AuthInfomation />
+      <>
+        {lengthDataTopic ? (
+          <AppView paddingHorizontal={ms(23)}>
+            <AppTabs
+              data={dataTopic}
+              keyLabel="name"
+              onPress={onSelectedTopic}
+            />
+          </AppView>
+        ) : null}
+      </>
       <AppView flex paddingLeft={ms(23)}>
-        {lengthRoutes ? (
-          <AppTabBar
-            renderScene={renderScene}
-            routes={routes}
-            onSelected={handleSelected}
-          />
-        ) : (
-          <Empty />
-        )}
+        <ListNews data={dataNews} />
       </AppView>
     </Container>
   );

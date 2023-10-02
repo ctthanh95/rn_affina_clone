@@ -1,45 +1,68 @@
 import React, {useCallback, useRef} from 'react';
 import {TouchableOpacity} from 'react-native';
+import {isEmpty} from 'lodash';
 import BottomSheet from '@gorhom/bottom-sheet';
 import {Container, AppView, AppText, AppBottomSheet} from '@components';
 import Header from './components/Header';
 import MainBenefit from './components/MainBenefit';
 import SideBenefit from './components/SideBenefit';
 import {CONTENT} from '@utils/fontStyle';
-import {BLACK} from '@utils/colors';
+import {BLACK, WHITE} from '@utils/colors';
 import {Right} from '@utils/svg';
 import Terms from './components/Terms';
+import Duration from './components/Duration';
 import Cart from './components/Cart';
 import {ms, vs} from '@utils/responsive';
-import styles from './styles';
-import Duration from './components/Duration';
 
 type Props = {
   data: any;
   fee: number;
   dataTerms: any;
-  menuSeleted: string;
   feeInsuranceSelect: any;
   onSetFee: (isSelectes: boolean, money: number, id: string) => void;
   onFeeInsuranceSelect: (item: any) => void;
   onDataFilter: (id: string) => void;
-  onBuyInsurance: () => void;
+  onSubmit: () => void;
   voucher: string;
   onVoucher: (code: string) => void;
 };
+
+const Policy = ({onPress}: any) => (
+  <TouchableOpacity activeOpacity={0.9} onPress={onPress}>
+    <AppView
+      row
+      alignCenter
+      backgroundColor={WHITE}
+      radius={ms(16)}
+      paddingVertical={ms(8)}
+      paddingHorizontal={ms(16)}
+      marginTop={ms(20)}
+      marginBottom={ms(50)}>
+      <AppView flex>
+        <AppText
+          flexGrow
+          style={CONTENT.medium_14}
+          color={BLACK[100]}
+          marginRight={ms(16)}>
+          Điều khoản, chính sách và thông tin khác của bảo hiểm
+        </AppText>
+      </AppView>
+      <Right />
+    </AppView>
+  </TouchableOpacity>
+);
 
 const View = ({
   data,
   fee,
   dataTerms,
-  menuSeleted,
   feeInsuranceSelect,
   voucher,
   onVoucher,
   onDataFilter,
   onSetFee,
   onFeeInsuranceSelect,
-  onBuyInsurance,
+  onSubmit,
 }: Props) => {
   const {
     companyId,
@@ -50,7 +73,6 @@ const View = ({
     listProductSideBenefit,
     listFeeInsurance,
   } = data;
-
   const sheetRefTerms = useRef<BottomSheet>(null);
   const sheetRefCart = useRef<BottomSheet>(null);
 
@@ -68,12 +90,15 @@ const View = ({
     sheetRefCart.current?.close();
   };
 
+  const isEmptyData = isEmpty(data);
+
+  const title = data?.programName
+    ? `${data?.programName} - ${data?.packageName}`
+    : '';
+
   return (
     <>
-      <Container
-        isAuth
-        title={`${data?.programName} - ${data?.packageName}`}
-        isScrollView>
+      <Container isAuth title={title} isScrollView>
         <AppView
           paddingHorizontal={ms(23)}
           flex
@@ -86,7 +111,6 @@ const View = ({
           />
           {lengthListProductInProgram ? (
             <MainBenefit
-              menuSeleted={menuSeleted}
               listProductInProgram={listProductInProgram}
               listProductMainBenefit={listProductMainBenefit}
               onDataFilter={onDataFilter}
@@ -95,30 +119,19 @@ const View = ({
           {lengthListProductSideBenefit ? (
             <SideBenefit data={listProductSideBenefit} onSetFee={onSetFee} />
           ) : null}
-          {dataTerms ? (
-            <TouchableOpacity
-              activeOpacity={0.9}
-              style={styles.policies}
-              onPress={handleBottomSheetTerm}>
-              <AppText
-                style={CONTENT.medium_14}
-                color={BLACK[100]}
-                marginRight={ms(16)}>
-                Điều khoản, chính sách và thông tin khác của bảo hiểm
-              </AppText>
-              <Right />
-            </TouchableOpacity>
-          ) : null}
+          {dataTerms ? <Policy onPress={handleBottomSheetTerm} /> : null}
         </AppView>
       </Container>
-      <Cart
-        fee={fee}
-        feeInsuranceSelect={feeInsuranceSelect}
-        voucher={voucher}
-        onVoucher={onVoucher}
-        onBottomSheet={handleBottomSheetCart}
-        onBuyInsurance={onBuyInsurance}
-      />
+      {!isEmptyData ? (
+        <Cart
+          fee={fee}
+          feeInsuranceSelect={feeInsuranceSelect}
+          voucher={voucher}
+          onVoucher={onVoucher}
+          onBottomSheet={handleBottomSheetCart}
+          onSubmit={onSubmit}
+        />
+      ) : null}
       <AppBottomSheet
         isScroll
         sheetRef={sheetRefTerms}

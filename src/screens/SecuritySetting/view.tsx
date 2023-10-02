@@ -16,7 +16,6 @@ const View = () => {
   const handleSwitch = () => {
     dispatch(setBiometrics(!valueIsBiometrics));
   };
-  console.log(valueIsBiometrics);
   return (
     <Container isAuth title="Cài đặt bảo mật">
       <AppView flex paddingHorizontal={ms(23)}>
