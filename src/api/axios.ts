@@ -1,8 +1,6 @@
-import {finishCallApiSlice, startCallApiSlice} from '@slices/loadingSlice';
-import {storage} from '@utils/mmkv';
 import axios from 'axios';
 import Config from 'react-native-config';
-import store from 'src/redux/store';
+import {storage} from '@utils/mmkv';
 
 const REQUEST_TIMEOUT = 60000;
 
