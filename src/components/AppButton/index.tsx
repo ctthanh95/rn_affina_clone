@@ -23,7 +23,7 @@ const AppButton = ({title, onPress, disabled = false}: Props) => {
           backgroundColor: disabled ? DISABLE_BUTTON : PRIMARY,
         },
       ]}>
-      <AppText style={BUTTON[16]} color={WHITE}>
+      <AppText style={BUTTON[14]} color={WHITE} flex>
         {title.toUpperCase()}
       </AppText>
     </TouchableOpacity>

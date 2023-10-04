@@ -14,6 +14,8 @@ type Props = {
   points?: string[];
   children: string | JSX.Element | JSX.Element[];
   isScroll?: boolean;
+  enablePanDownToClose?: boolean;
+  onClose?: () => void;
 };
 
 const AppBottomSheet = ({
@@ -21,6 +23,8 @@ const AppBottomSheet = ({
   points = ['20%'],
   isScroll = false,
   children,
+  enablePanDownToClose = true,
+  onClose,
 }: Props) => {
   const snapPoints = useMemo(() => points, []);
   const Wrap = isScroll ? BottomSheetScrollView : BottomSheetView;
@@ -31,16 +35,21 @@ const AppBottomSheet = ({
         index={-1}
         ref={sheetRef}
         snapPoints={snapPoints}
-        enablePanDownToClose={true}
+        enablePanDownToClose={enablePanDownToClose}
         handleIndicatorStyle={styles.indicator}
         backdropComponent={props => (
           <BottomSheetBackdrop
+            onPress={() => {
+              if (onClose) onClose();
+            }}
             {...props}
             appearsOnIndex={0}
             disappearsOnIndex={-1}
           />
         )}>
-        <Wrap showsVerticalScrollIndicator={false}>{children}</Wrap>
+        <Wrap style={styles.container} showsVerticalScrollIndicator={false}>
+          {children}
+        </Wrap>
       </BottomSheet>
     </Portal>
   );
@@ -53,5 +62,8 @@ const styles = StyleSheet.create({
     backgroundColor: BLACK[10],
     width: s(50),
     height: vs(4),
+  },
+  container: {
+    flex: 1,
   },
 });

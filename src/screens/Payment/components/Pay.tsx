@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import {Checkbox, AppText, AppView, AppButton} from '@components';
+import {Checkbox, AppText, AppView} from '@components';
 import {CONTENT} from '@utils/fontStyle';
 import {ms} from '@utils/responsive';
 import {Right} from '@utils/svg';
@@ -88,7 +88,6 @@ const Pay = ({data, onPress}: TPay) => {
           />
         ))}
       </AppView>
-      <AppButton title="Yêu cầu khách hàng thanh toán" />
     </AppView>
   );
 };

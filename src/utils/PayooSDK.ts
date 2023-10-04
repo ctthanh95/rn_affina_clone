@@ -11,12 +11,43 @@ enum LANG {
   en = 1,
 }
 
+export enum METHODS {
+  ALL = 0,
+  E_WALLET = 1,
+  INTERNATIONAL_CARD = 2,
+  DOMESTIC_CARD = 3,
+  PAYMENT_LATER = 4,
+  QR_CODE = 5,
+  INSTALLMENT = 6,
+}
+
+export enum SUPPORTED_METHODS {
+  ALL = 0,
+  E_WALLET_VALUE = 1,
+  DOMESTIC_CARD_VALUE = 2,
+  INTERNATIONAL_CARD_VALUE = 4,
+  PAY_AT_STORE_VALUE = 8,
+  TOKEN_VALUE = 16,
+  INSTALLMENT_VALUE = 32,
+  QR_CODE_VALUE = 64,
+  APP_2_APP_VALUE = 128,
+  QR_PAY_VALUE = 512,
+  RECURRING_VALUE = 1024,
+}
+
+export enum RESULT {
+  SUCCESS = 0,
+  FAILURE = -1,
+  CANCEL = 2,
+  UNKNOWN = 1,
+}
+
 export const paymentPayoo = (
-  orderInfo,
-  checkSum,
-  cashAmount,
-  supportedMethods,
-  data,
+  orderInfo: string,
+  checkSum: string,
+  cashAmount: number,
+  supportedMethods: number,
+  callback: (data: any) => void,
 ) => {
   const sdkConfig = {
     Environment: ENV.dev,
@@ -28,7 +59,5 @@ export const paymentPayoo = (
     AppCode: 'Payoo',
   };
 
-  Payoo.pay(sdkConfig, orderInfo, checkSum, data =>
-    console.log('PayooResponse', data),
-  );
+  Payoo.pay(sdkConfig, orderInfo, checkSum, (data: any) => callback(data));
 };

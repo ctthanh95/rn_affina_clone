@@ -1,27 +1,30 @@
 import {NativeModules, Platform} from 'react-native';
 
 export default class Payoo {
-    static payooSdk = Platform.OS === 'ios' ? NativeModules.PayooPaymentSDKModule : NativeModules.PayooSDKAndroidModule;
+  static payooSdk =
+    Platform.OS === 'ios'
+      ? NativeModules.PayooPaymentSDKModule
+      : NativeModules.PayooSDKAndroidModule;
 
-    static async pay(sdkConfig, OrderXML, OrderChecksum, callback) {
-        let sdkInfo = {};
+  static async pay(sdkConfig, OrderXML, OrderChecksum, callback) {
+    let sdkInfo = {};
 
-        //MerchantID and MerchantShareKey: is required
-        sdkInfo.MerchantID = sdkConfig.MerchantId;
-        sdkInfo.MerchantShareKey = sdkConfig.MerchantShareKey;
+    //MerchantID and MerchantShareKey: is required
+    sdkInfo.MerchantID = sdkConfig.MerchantId;
+    sdkInfo.MerchantShareKey = sdkConfig.MerchantShareKey;
 
-        //Order's information: is required
-        sdkInfo.PayooOrderChecksum = OrderChecksum;
-        sdkInfo.PayooOrderXML = OrderXML;
-        sdkInfo.PayooCashAmount = sdkConfig.PayooCashAmount;
+    //Order's information: is required
+    sdkInfo.PayooOrderChecksum = OrderChecksum;
+    sdkInfo.PayooOrderXML = OrderXML;
+    sdkInfo.PayooCashAmount = sdkConfig.PayooCashAmount;
 
-        //Optional area
-        sdkInfo.Environment = sdkConfig.Environment; // 0: DEV, 1: PROD
-        sdkInfo.Language = sdkConfig.Language; // 0: VIE, 1: ENG
+    //Optional area
+    sdkInfo.Environment = sdkConfig.Environment; // 0: DEV, 1: PROD
+    sdkInfo.Language = sdkConfig.Language; // 0: VIE, 1: ENG
 
-        // Method configuration: is optional
+    // Method configuration: is optional
 
-        /*
+    /*
         Each payment method has a value:
             E_WALLET_VALUE = 1
             DOMESTIC_CARD_VALUE = 2
@@ -39,36 +42,37 @@ export default class Payoo {
             Same with AppCode
         */
 
-        sdkInfo.SupportedMethods = sdkConfig.SupportedMethods;
-        sdkInfo.UserId = sdkConfig.UserId || null;
-        sdkInfo.Period = sdkConfig.Period || null;
-        sdkInfo.BankCode = sdkConfig.BankCode || null;
-        sdkInfo.AppCode = sdkConfig.AppCode || null;
+    sdkInfo.SupportedMethods = sdkConfig.SupportedMethods;
+    sdkInfo.UserId = sdkConfig.UserId || null;
+    sdkInfo.Period = sdkConfig.Period || null;
+    sdkInfo.BankCode = sdkConfig.BankCode || null;
+    sdkInfo.AppCode = sdkConfig.AppCode || null;
 
-        // Customer's information: is optional
-        sdkInfo.CustomerEmail = sdkConfig.CustomerEmail || null;
-        sdkInfo.CustomerPhone = sdkConfig.CustomerPhone || null;
-        const data = JSON.parse(JSON.stringify(sdkInfo));
-        console.log('data', data);
-        console.log('type of data', typeof data);
-        let response = await this.payooSdk.pay(data);
-        console.log(response)
-        if (response) {
-            if (callback) {
-                callback(response);
-            }
-        } else {
-            alert('ERROR PAYOO');
-        }
+    // Customer's information: is optional
+    sdkInfo.CustomerEmail = sdkConfig.CustomerEmail || null;
+    sdkInfo.CustomerPhone = sdkConfig.CustomerPhone || null;
+    const data = JSON.parse(JSON.stringify(sdkInfo));
+    // console.log('data', data);
+    // console.log('type of data', typeof data);
+    let response = await this.payooSdk.pay(data);
+    // console.log(response)
+    if (response) {
+      if (callback) {
+        callback(response);
+      }
+    } else {
+      alert('ERROR PAYOO');
     }
+  }
 
-    static handleErrorMess(code, languageData = {}) {
-        let mess = languageData.PAYOOCODE_ERROR_DEFAULT + code || 'ERROR + !!' + code;
-        Object.entries(languageData).forEach(([key, value]) => {
-            if (key === `PAYOOCODE_${code}`) {
-                mess = value + code;
-            }
-        });
-        return mess;
-    }
+  static handleErrorMess(code, languageData = {}) {
+    let mess =
+      languageData.PAYOOCODE_ERROR_DEFAULT + code || 'ERROR + !!' + code;
+    Object.entries(languageData).forEach(([key, value]) => {
+      if (key === `PAYOOCODE_${code}`) {
+        mess = value + code;
+      }
+    });
+    return mess;
+  }
 }

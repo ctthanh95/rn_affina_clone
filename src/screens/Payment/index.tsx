@@ -2,31 +2,32 @@ import React from 'react';
 import {useRoute} from '@react-navigation/native';
 import {Atm, Cash_Payment, Credit, Installment} from '@utils/svg';
 import View from './view';
+import {METHODS, SUPPORTED_METHODS} from '@utils/PayooSDK';
 
 const DATA_METHOD_PAYMENT = [
   {
     title: 'Thẻ ATM',
     icon: Atm,
-    id: 3,
-    payoo: 2,
+    id: METHODS.DOMESTIC_CARD,
+    payoo: SUPPORTED_METHODS.DOMESTIC_CARD_VALUE,
   },
   {
     title: 'Thẻ credit (Visa, Master)',
     icon: Credit,
-    id: 2,
-    payoo: 2,
+    id: METHODS.INTERNATIONAL_CARD,
+    payoo: SUPPORTED_METHODS.INTERNATIONAL_CARD_VALUE,
   },
   // {
   //   title: 'Trả góp qua thẻ tính dụng',
   //   icon: Installment,
-  //   id: 6,
-  //   payoo: 32,
+  //   id: METHODS.INSTALLMENT,
+  //   payoo: SUPPORTED_METHODS.INSTALLMENT_VALUE,
   // },
   // {
   //   title: 'Mua trước trả sau',
   //   icon: Cash_Payment,
-  //   id: 6,
-  //   payoo: 32,
+  //   id: METHODS.INSTALLMENT,
+  //   payoo: SUPPORTED_METHODS.INSTALLMENT_VALUE,
   // },
 ];
 
