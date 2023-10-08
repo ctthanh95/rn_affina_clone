@@ -70,14 +70,14 @@ const ItemProgram = ({item, onPress}: Props) => {
           flexGrow
           numberOfLines={2}
           style={CONTENT.bold_12}
-          marginVertical={ms(12)}>
+          marginTop={ms(8)}>
           {item.groupName}
         </AppText>
         {content() ? (
           <AppText
             numberOfLines={2}
             style={CONTENT.semibold_10}
-            marginTop={ms(4)}>
+            marginVertical={ms(4)}>
             {content()}
           </AppText>
         ) : null}
