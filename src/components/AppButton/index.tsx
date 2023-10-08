@@ -23,7 +23,7 @@ const AppButton = ({title, onPress, disabled = false}: Props) => {
           backgroundColor: disabled ? DISABLE_BUTTON : PRIMARY,
         },
       ]}>
-      <AppText style={BUTTON[14]} color={WHITE} flex>
+      <AppText style={BUTTON[14]} color={WHITE}>
         {title.toUpperCase()}
       </AppText>
     </TouchableOpacity>
@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: PRIMARY,
     borderRadius: ms(16),
-    padding: ms(16),
     alignItems: 'center',
     justifyContent: 'center',
     height: ms(56),
